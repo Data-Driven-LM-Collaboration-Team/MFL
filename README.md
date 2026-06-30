@@ -1,405 +1,316 @@
-# 组会汇报：对象级异常双塔方法
+# Object-level Anomaly Vector 组会汇报
 
-## 1. 核心目标
+本次只汇报 anomaly vector 这条线：目标是训练一个对象级异常评分器，让模型判断“哪个对象异常”，而不是只判断“整段视频异常”。
 
-我们希望把视频异常检测从整帧判断转成对象级判断：
+## 方法概览
 
-```text
-video -> object tokens -> object embedding -> dual-tower anomaly score
-```
+![anomaly vector pipeline](assets/20260630_anomaly_vector/anomaly_pipeline.png)
 
-当前阶段只训练 **对象级异常打分器**，不训练 Qwen3-VL、不训练 tracking，也不训练 token compression policy。后续 token compression 可以直接使用 object anomaly score：
+当前效果最稳的主方法可以概括为：
 
 ```text
-高分对象 token -> 保留
-低分对象 token -> merge / prune
+文本锚定残差异常向量
++ target object tokens
++ context object tokens
++ real background tokens
++ bbox motion / relation features
++ fixed-threshold FPR guard
 ```
 
----
+输入不是整段视频的全局表示，而是同一个 object track 的对象级 token 序列。训练阶段先使用高质量 YOLO + tracking 得到可靠 object track，再从冻结的 Qwen3-VL ViT token cache 中取出对象相关 token。
 
-## 2. 方法 Pipeline
-
-![Object-level dual-tower pipeline](assets/overall_pipeline_imagegen_annotated.png)
-
-流程概括：
-
-1. 对所有视频帧提取并缓存 Qwen3-VL ViT tokens。
-2. 用 tracking bbox 将视觉 tokens 绑定到 object。
-3. 对一个 object 在短时间窗口内的 tokens 做 mean pooling，得到 object embedding。
-4. 用双塔模型计算 object 与 normal/anomaly 表示的相似度。
-5. 输出 object anomaly score。
-
----
-
-## 3. Object Feature 构造
-
-全帧 token cache：
+数据流如下：
 
 ```text
-总帧数：210,880
-cache 大小：916GB
-ViT 像素预算：768 * 768
+视频帧
+-> 冻结 Qwen3-VL ViT
+-> full-frame visual tokens
+-> target object tokens
+-> same-event context object tokens
+-> real background tokens
+-> motion / relation features
+-> object-event embedding
+-> normal / anomaly text-anchored vectors
+-> object anomaly score
 ```
 
-实际 ViT 输入尺寸保持长宽比：
+这套方法的关键点不是“把所有 token 简单平均”，而是把目标对象、同场景其他对象、真实背景和运动关系分开建模：
 
 ```text
-16:9 -> 1024 x 576
-4:3  -> 864 x 640
+target object tokens:
+  当前要判断是否异常的对象，是异常分数的主证据。
+
+context object tokens:
+  同一个事件片段中的其他对象，用来判断交互和场景关系。
+
+real background tokens:
+  从 bbox 外真实背景区域采样，帮助模型区分“对象异常”和“场景背景相似”。
+
+motion / relation features:
+  包括 bbox 位置、面积、速度、对象间距离等，补充纯视觉 token 不稳定的运动线索。
 ```
 
-每个 object-window 样本：
+这里的 bbox / motion / relation features 都不是额外人工标注出来的，而是由 tracking 结果自动计算得到：
 
 ```text
-track_id + 32 raw frames window + stride 4 sampled 8 frames
+逐帧 tracking bbox:
+  每个 object 在每一帧都有 bbox_xyxy = [x1, y1, x2, y2]
+  同时保留 track_id、类别名、检测置信度和视频原始宽高
 ```
 
-特征：
+基础运动特征来自同一 object track 的逐帧 bbox：
+
+| 特征 | 如何计算 |
+|---|---|
+| 中心位置 | `cx=(x1+x2)/2/video_width`, `cy=(y1+y2)/2/video_height` |
+| 宽高 | `w=(x2-x1)/video_width`, `h=(y2-y1)/video_height` |
+| 面积 | `area=w*h` |
+| 速度 | 相邻帧 bbox 中心点位移：`sqrt(delta_x^2 + delta_y^2)` |
+| 横向/纵向运动 | 相邻帧中心点的 `abs(delta_x)` 和 `abs(delta_y)` |
+| 置信度 | tracking / detection 结果里的 confidence 均值 |
+
+也就是说，如果一个人持续奔跑，他的 bbox 中心点在连续帧中会有更大的位移；如果对象接近镜头或远离镜头，bbox 面积会发生变化。
+
+对象间关系特征来自同一帧中的其他 tracks：
+
+| 特征 | 如何计算 |
+|---|---|
+| 最近对象距离 | 当前对象中心点到其他对象中心点的最小距离 |
+| 平均对象距离 | 当前对象到其他对象中心点距离的均值 |
+| 近邻数量 | 半径 `0.1 / 0.2 / 0.3` 内有多少其他对象 |
+| bbox overlap | 当前对象 bbox 和其他对象 bbox 的 IoU / overlap count |
+| 同类近邻数量 | 距离较近且类别相同的对象数量 |
+| 最近对象类别 | 最近邻对象属于人、车辆、非机动车还是其他类别 |
+| 边界距离 | 当前对象中心点到画面边界的最小距离 |
+
+这些统计量会被归一化后作为 side features 输入模型。当前主方法中 side features 维度是 `125`，其中包含基础 bbox 运动信息、对象间关系统计，以及部分 token 数量/轨迹长度统计。
+
+最终模型不是输出视频级异常，而是对每个 object-event 输出一个对象级异常分数：
 
 ```text
-visual feature: [11174, 4096]
-motion feature: [11174, 8]
+同一事件里有多个 object
+-> 每个 object 单独打分
+-> 分数最高的对象就是模型认为最可能异常的对象
 ```
 
----
+具体实现时，每个 object-event 会经过以下几步：
 
-## 4. 双塔模型
+1. **对象 token 聚合。**
 
-![Dual-tower scoring pipeline](assets/dual_tower_pipeline_imagegen_annotated.png)
+   同一个 object 在每一帧里覆盖的 token 数量不同，所以先把每帧变长的 object tokens 聚合成一个帧级对象向量。这样可以把“一帧中这个对象的视觉证据”压成固定维度表示。
 
-双塔由两侧组成：
+2. **跨帧聚合。**
 
-- visual tower：输入 object feature，输出 object embedding。
-- text/prompt tower：输出 normal / anomaly 两个文本侧表示。
+   一个 object-event 包含多帧对象向量。模型再把这些帧级向量聚合成一个 object-event embedding，用来表示“这个对象在这一段时间里的整体状态”。
 
-异常分数由 object embedding 和 normal/anomaly 表示的相似度得到。
+3. **上下文与背景融合。**
 
----
+   target object embedding 会和同事件其他对象、真实背景、运动/关系特征融合。这样模型不只看对象外观，也能利用“对象和场景/其他对象之间的关系”。
 
-## 5. Anomaly Vector 与 Text Prompt 的关系
+4. **与 anomaly vectors 比较。**
 
-这里要区分：
+   最终 object-event embedding 与 normal/anomaly vectors 计算相似度，得到对象级异常分数。
+
+## Anomaly Vector 如何得到
+
+不是直接训练一个普通二分类 head，而是更接近 AnomalyCLIP 的思路：先用文本语义初始化 normal / anomaly 方向，再通过对象级监督微调这些方向。
 
 ```text
-text prompt:
-    人写的 normal/anomaly 自然语言描述
-
-anomaly vector:
-    双塔对齐空间里的异常类别原型
+normal / anomaly prompts
+-> Qwen tokenizer + frozen text embedding
+-> text prototype base
+-> trainable projection / residual
+-> normal / anomaly vectors
 ```
 
-当前 anomaly vector **不是插入 Qwen LLM prompt 的 soft token**，也没有经过完整 Qwen LLM hidden state。它位于双塔的 text-side representation 中，用来和 object embedding 做相似度比较。
+当前 prototype 设置：
 
-### Pseudo Dual Tower
+| 类型 | 数量 | 作用 |
+|---|---:|---|
+| normal prototypes | 4 | 表示正常行人、车辆、普通物体运动 |
+| generic anomaly prototypes | 2 | 表示通用异常行为 |
+| 具体异常类型 prototypes | 每类 3 个 | 覆盖行人动作异常、非机动车异常、机动车异常、打斗/群体异常、物体交互异常 |
+| 稀有异常 prototype | 1 | 作为开放集异常辅助方向 |
+| 总数 | 22 | 共同参与对象异常打分 |
 
-直接学习两个向量：
+推理时主要使用 binary anomaly score：
 
 ```text
-prompt_embeddings[0] = normal vector
-prompt_embeddings[1] = anomaly vector
+score(object) = P(anomaly | object)
 ```
 
-异常样本会把 object embedding 拉向 anomaly vector；正常样本会把 object embedding 拉向 normal vector。
+异常小类原型主要作为辅助训练信号，让 anomaly vector 不至于全部塌缩到一个粗糙方向。
 
-### Qwen Text Dual Tower
+更具体地说，训练时对象向量和这些 normal / anomaly vectors 做相似度比较。如果对象是真实异常对象，训练会把它拉近 anomaly vectors；如果对象是正常对象，训练会把它拉近 normal vectors。这样得到的 anomaly vector 不是凭空学出的分类权重，而是“文本语义初始化 + 对象级异常监督”共同形成的可学习方向。
 
-先用自然语言 prompt 得到 Qwen 词嵌入均值：
+## 训练设置
+
+| 项目 | 设置 |
+|---|---|
+| 训练单位 | 一个 object 在一个事件片段内的 object-event token sequence |
+| 视觉特征 | 冻结 Qwen3-VL ViT token cache |
+| 训练样本 | 4371 个 object-event |
+| 训练正样本 | 518 |
+| 训练负样本 | 3853 |
+| 验证样本 | 1251 个 object-event |
+| 验证异常对象 | 147 |
+| 验证正常对象 | 1104 |
+| 阈值口径 | 固定 threshold = 0.5 |
+| 训练目标 | 对象级 normal / abnormal 判断 |
+
+损失函数由几部分组成：
+
+| Loss | 目的 |
+|---|---|
+| binary anomaly loss | 判断对象是否异常 |
+| category auxiliary loss | 用具体异常类型辅助约束异常方向 |
+| threshold margin loss | 让异常分数推到 0.5 以上，正常分数压到 0.5 以下 |
+| ranking loss | 异常对象分数应高于正常对象 |
+| hard negative loss | 压低容易误报的正常对象 |
+| same-event negative constraint | 同一个异常事件里的正常对象不能被误判成异常 |
+| prototype separation loss | 防止 normal / anomaly vectors 混在一起 |
+| text anchor loss | 防止可学习向量偏离文本语义太远 |
+
+## 核心指标
+
+当前主方法在固定阈值 `0.5` 下表现比较均衡：Precision、Recall、F1 和 FPR 都比较稳定，适合作为当前组会主方法。
+
+| 指标 | 数值 | 含义 |
+|---|---:|---|
+| Accuracy | 0.9448 | 所有正常/异常对象整体判断正确率 |
+| Precision | 0.7566 | 被判为异常的对象里，有多少真的异常 |
+| Recall | 0.7823 | 真实异常对象里，有多少被找出来 |
+| F1 | 0.7692 | Precision 和 Recall 的综合指标 |
+| FPR | 0.0335 | 正常对象被误判成异常的比例 |
+| AUROC | 0.9509 | 不固定阈值时的排序能力 |
+| AUPRC | 0.8132 | 异常样本较少时更关注的排序指标 |
+| Event Top1 Recall | 0.9138 | 每个异常事件中，最高分对象命中异常对象的比例 |
+
+这个结果说明两点：
 
 ```text
-normal prompts  -> Qwen token embeddings mean
-anomaly prompts -> Qwen token embeddings mean
+1. 对象级 anomaly vector 已经有较好的排序能力。
+2. 固定阈值下不能只追求召回率，否则会把同场景正常对象也误判成异常。
 ```
 
-Qwen 词嵌入冻结，只训练 text projection。也就是说，Qwen text 版本不是直接训练 prompt embedding，而是训练投影后的 normal/anomaly 表示。
+分类型观察上，机动车异常、打斗/群体秩序异常相对更容易；行人动作异常和物体状态/交互异常更难。稀有开放集异常样本很少，不能据此说明开放集异常已经解决。
 
-更具体地说，文本 prompt 先被转换成固定嵌入向量：
+## 不同阈值下的表现
+
+异常分数越过阈值就判为异常。阈值越低，模型越容易报警，Recall 通常更高，但正常误报也会增加；阈值越高，模型更保守，Precision 通常更高，但会漏掉更多异常对象。
+
+| Threshold | Accuracy | Recall | Precision | FPR | F1 |
+|---:|---:|---:|---:|---:|---:|
+| 0.05 | 0.9153 | 0.8367 | 0.6000 | 0.0743 | 0.6989 |
+| 0.10 | 0.9281 | 0.8299 | 0.6524 | 0.0589 | 0.7305 |
+| 0.20 | 0.9353 | 0.8027 | 0.6941 | 0.0471 | 0.7445 |
+| 0.30 | 0.9392 | 0.7891 | 0.7205 | 0.0408 | 0.7532 |
+| 0.40 | 0.9432 | 0.7891 | 0.7436 | 0.0362 | 0.7657 |
+| 0.50 | 0.9448 | 0.7823 | 0.7566 | 0.0335 | 0.7692 |
+| 0.60 | 0.9472 | 0.7755 | 0.7755 | 0.0299 | 0.7755 |
+| 0.70 | 0.9456 | 0.7551 | 0.7762 | 0.0290 | 0.7655 |
+| 0.80 | 0.9456 | 0.7415 | 0.7842 | 0.0272 | 0.7622 |
+| 0.90 | 0.9456 | 0.7075 | 0.8062 | 0.0226 | 0.7536 |
+| 0.95 | 0.9424 | 0.6735 | 0.8049 | 0.0217 | 0.7333 |
+
+从表中可以看到：
 
 ```text
-text prompt
-  -> Qwen tokenizer
-  -> Qwen embedding table
-  -> prompt embedding mean
+1. 如果更关心不要漏异常，可以把阈值降到 0.1-0.2，Recall 会升高，但 FPR 也会上升。
+2. 如果更关心报警可靠性，可以把阈值提高到 0.6-0.9，Precision 会更高，但 Recall 会下降。
+3. 固定阈值 0.5 是当前折中点：Recall 仍有 0.7823，同时 FPR 控制在 0.0335。
 ```
 
-这个 prompt embedding mean 本身不更新。训练过程中更新的是后面的 projection：
+## 召回优先训练探索
 
-```text
-fixed prompt embedding
-  -> trainable text projection
-  -> projected normal/anomaly representation
-```
+也尝试了更偏召回的训练策略，它和当前主方法不是同一个取舍：主方法强调低误报和固定阈值稳定性；召回优先探索版强调尽量不要漏掉异常对象。
 
-所以“投影后的向量”不是一个被直接保存并更新的参数，而是 projection 每次根据固定文本嵌入实时算出来的输出。projection 参数变了，同一个 prompt embedding 再投影出来的 normal/anomaly 表示也会随之改变。
+两种做法的核心区别如下：
 
-本次实验是二分类，所以当前只使用：
-
-```text
-1 个 normal representation
-1 个 anomaly representation
-```
-
-不是每个异常类别一个 vector。
-
----
-
-## 6. 异常分数如何得到
-
-视觉侧：
-
-```text
-v = normalize(f_visual(x))
-```
-
-文本侧：
-
-```text
-t_normal  = normalize(f_text(normal))
-t_anomaly = normalize(f_text(anomaly))
-```
-
-相似度：
-
-```text
-z_normal  = tau * dot(v, t_normal)
-z_anomaly = tau * dot(v, t_anomaly)
-```
-
-异常分数：
-
-```text
-P(normal), P(anomaly) = softmax([z_normal, z_anomaly])
-anomaly_score = P(anomaly)
-```
-
-固定阈值：
-
-```text
-score >= 0.5 -> anomaly
-score < 0.5  -> normal
-```
-
-事件定位时按 `anomaly_score` 排序，计算 Event TopK Recall。
-
----
-
-## 7. 数据划分
-
-本次使用所有可训练异常事件，包含 T01-T05 和 R06。R06 作为 anomaly 类参与二分类训练。
-
-| 项目 | 数值 |
-|---|---:|
-| 异常事件 | 256 |
-| object-window 样本 | 11,174 |
-| train 样本 | 8,172 |
-| val 样本 | 3,002 |
-| anomaly 正样本 | 6,053 |
-| normal 负样本 | 5,121 |
-
-划分方式：
-
-```text
-train / val only
-val ratio ≈ 30%
-scene-disjoint split
-train/val scene overlap = 0
-```
-
-scene-disjoint 划分可以减少同场景随机划分造成的“开卷考试”。
-
----
-
-## 8. 四种双塔方法
-
-| 方法 | 文本侧 | 输入 |
+| 对比项 | 当前主方法：低误报稳定型 | 召回优先探索版 |
 |---|---|---|
-| pseudo_dual_tower_visual_only | 可学习 normal/anomaly vectors | visual |
-| pseudo_dual_tower_visual_motion | 可学习 normal/anomaly vectors | visual + motion |
-| real_qwen_text_dual_tower_visual_only | Qwen prompt embedding mean | visual |
-| real_qwen_text_dual_tower_visual_motion | Qwen prompt embedding mean | visual + motion |
+| 训练目标 | 固定阈值下 Precision / Recall / FPR 更均衡 | 尽量提高异常 Recall |
+| 正负样本策略 | 正样本比例较克制，同时更强调 hard negative | 提高异常样本权重，让模型更容易把可疑对象判为异常 |
+| 正常对象约束 | 更强的正常对象约束和 FPR guard | 正常约束相对放松，允许更多对象被判为可疑 |
+| 同事件正常对象 | 强调压低同一异常事件里的正常对象分数 | 也使用同事件 hard negative，但更偏向保护异常召回 |
+| 阈值附近训练 | 希望异常过 0.5、正常低于 0.5，同时控制误报 | 更强地推动异常对象越过阈值 |
+| 结果倾向 | 误报低，整体更稳 | 召回高，但误报增加 |
 
-简单理解：
-
-- `pseudo_visual_only`：对象视觉特征 vs 可学习 normal/anomaly 原型。
-- `pseudo_visual_motion`：在上面基础上加入 bbox 运动特征。
-- `qwen_text_visual_only`：对象视觉特征 vs Qwen 文本语义初始化的 normal/anomaly 表示。
-- `qwen_text_visual_motion`：Qwen 文本语义初始化 + 视觉运动拼接特征。
-
----
-
-## 9. 重点方法：real_qwen_text_dual_tower_visual_motion
-
-第四种方法是：
+可以理解为：
 
 ```text
-real_qwen_text_dual_tower_visual_motion
+当前主方法：
+  更像“报警要更可靠”，所以 FPR 低、Precision 更好。
+
+召回优先探索版：
+  更像“异常对象尽量别漏”，所以 Recall 更高，但会多保留正常对象。
 ```
 
-它可以自然语言理解为：
+### 召回优先探索版的具体指标
+
+固定阈值 `0.5` 下，召回优先探索版的结果如下：
+
+| 指标 | 数值 | 含义 |
+|---|---:|---|
+| Accuracy | 0.9000 | 所有正常/异常对象整体判断正确率 |
+| Precision | 0.5285 | 被判为异常的对象里，有多少真的异常 |
+| Recall | 0.8883 | 真实异常对象里，有多少被找出来 |
+| F1 | 0.6627 | Precision 和 Recall 的综合指标 |
+| FPR | 0.0985 | 正常对象被误判成异常的比例 |
+| AUROC | 0.9571 | 不固定阈值时的排序能力 |
+| AUPRC | 0.7631 | 异常样本较少时更关注的排序指标 |
+| Event Top1 Recall | 0.9420 | 每个异常事件中，最高分对象命中异常对象的比例 |
+| TP / FP / TN / FN | 167 / 149 / 1363 / 21 | 混淆矩阵 |
+
+它相比当前主方法的主要变化是：
 
 ```text
-对象视觉特征 + 对象运动特征
-    vs
-Qwen 文本 prompt 初始化的 normal/anomaly 表示
+Recall 从 0.7823 提高到 0.8883，
+但 Precision 从 0.7566 降到 0.5285，
+FPR 从 0.0335 升到 0.0985。
 ```
 
-![方法四：Qwen 文本双塔 + 视觉运动对象特征](assets/method4_qwen_text_visual_motion_imagegen_annotated.png)
+也就是说，它确实更不容易漏异常，但会把更多正常对象也判成异常。
 
-这张图从模型数据流角度说明方法四。蓝色分支表示从 Qwen3-VL ViT token cache 中得到的 object-window 视觉特征；绿色分支表示 tracking bbox 产生的运动特征；紫色分支表示 normal/anomaly 文本 prompt 经过 Qwen tokenizer 和词嵌入均值后得到的固定文本语义起点。三路信息不会直接送入 Qwen LLM 生成答案，而是在双塔对齐空间里比较相似度。
+### 召回优先探索版在不同阈值下的表现
 
-图中需要特别注意两点。第一，Qwen 的文本嵌入是冻结的，训练时更新的是 `text_proj` 和视觉侧 projection。第二，最终的异常分数来自 object embedding 与 `t_normal`、`t_anomaly` 的余弦相似度 softmax；高分对象后续更适合保留 token，低分对象更适合 merge 或 prune。
+| Threshold | Accuracy | Recall | Precision | FPR | F1 |
+|---:|---:|---:|---:|---:|---:|
+| 0.15 | 0.8771 | 0.9362 | 0.4718 | 0.1303 | 0.6275 |
+| 0.50 | 0.9000 | 0.8883 | 0.5285 | 0.0985 | 0.6627 |
+| 0.75 | 0.9071 | 0.8617 | 0.5510 | 0.0873 | 0.6722 |
+| 0.95 | 0.9282 | 0.7447 | 0.6542 | 0.0489 | 0.6965 |
 
-### 输入端
+这个表说明：即使把阈值提高到 `0.75`，召回优先探索版仍然有 `0.8617` 的 Recall，但 FPR 仍高于当前主方法。因此它更适合证明“召回上限还有空间”，暂时不适合作为最终主方法。
 
-每个 object-window 的输入由两部分组成：
+## 主要困难
 
-```text
-visual feature: 4096 维
-motion feature: 8 维
-```
+1. **异常召回和误报率存在明显拉扯。**
 
-拼接后得到：
+   拉高 Recall 往往会把同场景正常对象也抬高，导致 FPR 上升。这个问题在同一个异常事件中尤其明显：异常对象旁边的正常对象也有相似场景背景。
 
-```text
-x = concat(visual, motion)
-dim(x) = 4104
-```
+2. **行人动作异常仍然难。**
 
-visual feature 描述对象外观与局部上下文，motion feature 描述 bbox 中心、尺寸、位移、速度和检测置信度等轨迹信息。
+   这类异常包含奔跑、摔倒、攀爬、徘徊等动作，很多证据来自连续多帧步态或姿态变化。单个 object-event 的平均视觉表征容易被正常帧稀释。
 
-### 文本端
+3. **稀有开放集异常样本太少。**
 
-文本端不是随机学两个向量，而是从 Qwen 的 normal/anomaly prompt 语义出发。
+   当前这类异常召回看起来高，但验证样本只有 3 个，不具备统计说服力。它更适合作为开放集测试，不适合作为强监督类别。
 
-normal/anomaly prompt 先变成固定 Qwen 文本嵌入：
+4. **固定阈值校准仍然关键。**
 
-```text
-normal prompts  -> fixed qwen_normal_text_feature
-anomaly prompts -> fixed qwen_anomaly_text_feature
-```
+   AUROC 高说明排序能力不错，但实际部署需要固定阈值可用。后续不能只追求 AUROC，需要继续看 `threshold=0.5` 下的 Precision / Recall / FPR。
 
-然后通过可训练 projection：
+5. **当前仍是离线 object-event 判断。**
 
-```text
-t_normal  = normalize(text_proj(qwen_normal_text_feature))
-t_anomaly = normalize(text_proj(qwen_anomaly_text_feature))
-```
+   真实 VAD 场景中，系统只能看到历史帧，不能提前知道 object track 什么时候结束。下一步需要在线 causal anomaly score，让异常分数随历史帧累积，达到阈值后报警。
 
-Qwen 文本嵌入本身冻结；`text_proj` 会被训练。因此训练后改变的是投影方式，而不是原始 prompt embedding。
+## 组会结论
 
-### 训练时文本塔如何更新
-
-如果样本是正常对象，loss 会推动：
+当前 object-level anomaly vector 已经证明可行：Qwen3-VL object tokens 经过对象级聚合后，可以训练出有效的 anomaly vectors。后续最重要的不是继续堆复杂结构，而是围绕三个问题改进：
 
 ```text
-object embedding 更接近 t_normal
-object embedding 远离 t_anomaly
-```
-
-如果样本是异常对象，loss 会推动：
-
-```text
-object embedding 更接近 t_anomaly
-object embedding 远离 t_normal
-```
-
-梯度会更新 `text_proj`。于是同一个固定 anomaly prompt embedding 再经过 projection 时，输出的 `t_anomaly` 会逐渐转向训练集中异常对象所在的方向。
-
-所以这个方法的文本塔可以理解为：
-
-```text
-Qwen 提供 normal/anomaly 语义起点
-projection 把这个语义起点适配到对象级异常检测空间
-```
-
-### 为什么关注这个方法
-
-它的对象级 Balanced Acc 不是最高，但事件级排序最好：
-
-```text
-Event Top3 Recall = 1.0000
-```
-
-这说明它很适合后续 token compression 场景：我们不一定只依赖固定阈值，而是更关心一个事件里异常对象能否排到前几名，从而优先保留这些对象的 tokens。
-
----
-
-## 10. 训练设置
-
-```text
-normal = 0
-T01/T02/T03/T04/T05/R06 = 1
-```
-
-| 配置 | 数值 |
-|---|---:|
-| epochs | 80 |
-| batch size | 64 |
-| learning rate | 1e-3 |
-| embedding dim | 256 |
-| tau | 10.0 |
-| threshold | 0.5 |
-
-损失：
-
-```text
-L = CE(normal/anomaly logits, label) + 0.1 * L_sep
-```
-
-其中 `L_sep` 防止 normal/anomaly 两个文本侧表示塌缩到一起。
-
----
-
-## 11. 实验结果
-
-| 方法 | Val Balanced Acc | Anomaly Recall | Normal FPR | AUROC | Event Top3 |
-|---|---:|---:|---:|---:|---:|
-| pseudo_dual_tower_visual_only | 0.7655 | 0.7582 | 0.2273 | 0.8228 | 0.9762 |
-| pseudo_dual_tower_visual_motion | 0.7351 | 0.7210 | 0.2507 | 0.7794 | 0.9524 |
-| real_qwen_text_dual_tower_visual_only | 0.7456 | 0.6716 | 0.1804 | 0.7953 | 0.9762 |
-| real_qwen_text_dual_tower_visual_motion | 0.7565 | 0.7088 | 0.1957 | 0.8105 | 1.0000 |
-
-主要观察：
-
-- 对象级分类指标最好的是 `pseudo_dual_tower_visual_only`。
-- 事件级 Top3 最好的是 `real_qwen_text_dual_tower_visual_motion`。
-- Qwen text 版本误报率较低，但异常召回偏低。
-- 加 motion 后没有稳定提升，说明当前 motion feature 仍有噪声。
-
----
-
-## 12. 结论
-
-本次实验说明：
-
-1. 对象级双塔异常打分是可行的。
-2. `pseudo_dual_tower_visual_only` 可作为当前对象异常分数 baseline。
-3. Event Top3 Recall 较高，说明异常对象通常能排到前几名，适合后续 TopK token compression。
-4. scene-disjoint 验证下 train/val 差距明显，跨场景泛化仍是主要问题。
-5. T01 类异常较难，需要更多时序和姿态相关信息。
-
----
-
-## 13. 下一步
-
-建议：
-
-- 使用 `pseudo_dual_tower_visual_only` 作为 token compression 的初始 object score。
-- 针对 T01 增强样本和时序特征。
-- 改进 motion feature 或加入 lightweight temporal encoder。
-- 尝试完整 Qwen LLM hidden-state 文本塔。
-- 将 object anomaly score 接入 token merge/prune 实验。
-
----
-
-## 14. 文件位置
-
-```text
-组会文档:
-GROUP_MEETING_DUAL_TOWER_CN.md
-
-完整实验报告:
-DUAL_TOWER_REPORT_CN.md
-
-结果目录:
-/home/expand_disk/data_repository/mfl/token_compression/20260613_data/results/exp_20260616_allframes_maxpix768_all_events_trainval30_dual_tower_v1
+1. 在不明显增加 FPR 的情况下提高行人动作异常和物体状态/交互异常的召回；
+2. 加强同事件正常对象的 hard negative 约束；
+3. 从离线 object-event 评分升级到在线历史帧累积评分。
 ```
