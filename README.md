@@ -1,316 +1,207 @@
-# Object-level Anomaly Vector 组会汇报
 
-本次只汇报 anomaly vector 这条线：目标是训练一个对象级异常评分器，让模型判断“哪个对象异常”，而不是只判断“整段视频异常”。
+## 1. 实验目标
 
-## 方法概览
-
-![anomaly vector pipeline](assets/20260630_anomaly_vector/anomaly_pipeline.png)
-
-当前效果最稳的主方法可以概括为：
+我们的最终目标不是单纯做检测，而是服务对象级异常检测和后续 token compression：
 
 ```text
-文本锚定残差异常向量
-+ target object tokens
-+ context object tokens
-+ real background tokens
-+ bbox motion / relation features
-+ fixed-threshold FPR guard
+Qwen3VL ViT tokens
+-> object binding
+-> object tracking / object track tokens
+-> object-level anomaly vector
+-> 保留异常对象 token，压缩低异常对象和背景 token
 ```
 
-输入不是整段视频的全局表示，而是同一个 object track 的对象级 token 序列。训练阶段先使用高质量 YOLO + tracking 得到可靠 object track，再从冻结的 Qwen3-VL ViT token cache 中取出对象相关 token。
+因此在前置阶段，召回率比精度更重要一些。漏掉异常对象会导致后续 anomaly vector 和 token compression 都无法恢复；误召回一些正常对象的代价主要是多保留一部分 token。
 
-数据流如下：
+## 2. Object Binding 高召回结果
+
+object binding 的任务是：
 
 ```text
-视频帧
--> 冻结 Qwen3-VL ViT
--> full-frame visual tokens
--> target object tokens
--> same-event context object tokens
--> real background tokens
--> motion / relation features
--> object-event embedding
--> normal / anomaly text-anchored vectors
--> object anomaly score
+输入：Qwen3VL ViT visual token grid
+输出：哪些 token 属于可见 object
 ```
 
-这套方法的关键点不是“把所有 token 简单平均”，而是把目标对象、同场景其他对象、真实背景和运动关系分开建模：
+训练时使用 YOLO / tracking 的 object 标注作为监督；推理时只需要 Qwen3VL ViT tokens 和 token geometry。
+
+### 2.1 当前推荐：spatial instance coverage recall
+
+这组方法在高召回和可接受 precision 之间最均衡。
+
+| Threshold | Precision | Recall | F1 |
+|---:|---:|---:|---:|
+| 0.05 | 0.4717 | 0.9812 | 0.6371 |
+| 0.10 | 0.5453 | 0.9745 | 0.6993 |
+| 0.20 | 0.6243 | 0.9654 | 0.7583 |
+| 0.30 | 0.6796 | 0.9569 | 0.7947 |
+| 0.35 | 0.7038 | 0.9526 | 0.8095 |
+| 0.40 | 0.7265 | 0.9470 | 0.8222 |
+| 0.50 | 0.7723 | 0.9342 | 0.8456 |
+| 0.60 | 0.8251 | 0.9122 | 0.8664 |
+| 0.70 | 0.8871 | 0.8696 | 0.8783 |
+
+如果我们更重视 recall，推荐使用：
 
 ```text
-target object tokens:
-  当前要判断是否异常的对象，是异常分数的主证据。
-
-context object tokens:
-  同一个事件片段中的其他对象，用来判断交互和场景关系。
-
-real background tokens:
-  从 bbox 外真实背景区域采样，帮助模型区分“对象异常”和“场景背景相似”。
-
-motion / relation features:
-  包括 bbox 位置、面积、速度、对象间距离等，补充纯视觉 token 不稳定的运动线索。
+threshold = 0.30: Recall 0.9569, Precision 0.6796
+threshold = 0.35: Recall 0.9526, Precision 0.7038
+threshold = 0.40: Recall 0.9470, Precision 0.7265
 ```
 
-这里的 bbox / motion / relation features 都不是额外人工标注出来的，而是由 tracking 结果自动计算得到：
+### 2.2 更激进版本：soft edge / class restore
+
+这组方法能把 recall 拉得更高，但低阈值下 precision 明显更差。
+
+| Threshold | Precision | Recall | F1 |
+|---:|---:|---:|---:|
+| 0.05 | 0.2053 | 0.9993 | 0.3407 |
+| 0.10 | 0.3060 | 0.9967 | 0.4683 |
+| 0.20 | 0.4575 | 0.9896 | 0.6257 |
+| 0.30 | 0.5707 | 0.9780 | 0.7208 |
+| 0.35 | 0.6202 | 0.9697 | 0.7566 |
+| 0.40 | 0.6680 | 0.9598 | 0.7878 |
+| 0.50 | 0.7629 | 0.9272 | 0.8370 |
+| 0.60 | 0.8495 | 0.8730 | 0.8611 |
+
+它适合做召回上限验证，但不适合直接作为 tracking 输入的默认配置，因为低阈值会把大量背景和邻近对象 token 一起选进来。
+
+## 3. Anomaly Vector 高召回结果
+
+anomaly vector 的任务是：
 
 ```text
-逐帧 tracking bbox:
-  每个 object 在每一帧都有 bbox_xyxy = [x1, y1, x2, y2]
-  同时保留 track_id、类别名、检测置信度和视频原始宽高
+输入：一个 object-event 的 target object tokens、context object tokens、background tokens 和运动/关系特征
+输出：该 object 是否异常
 ```
 
-基础运动特征来自同一 object track 的逐帧 bbox：
+当前高召回方法采用 recall-oriented 训练策略：提高异常样本权重，加强异常对象越过阈值的约束，适当放松正常对象约束。
 
-| 特征 | 如何计算 |
-|---|---|
-| 中心位置 | `cx=(x1+x2)/2/video_width`, `cy=(y1+y2)/2/video_height` |
-| 宽高 | `w=(x2-x1)/video_width`, `h=(y2-y1)/video_height` |
-| 面积 | `area=w*h` |
-| 速度 | 相邻帧 bbox 中心点位移：`sqrt(delta_x^2 + delta_y^2)` |
-| 横向/纵向运动 | 相邻帧中心点的 `abs(delta_x)` 和 `abs(delta_y)` |
-| 置信度 | tracking / detection 结果里的 confidence 均值 |
+| Threshold | Recall | Precision | FPR | F1 |
+|---:|---:|---:|---:|---:|
+| 0.05 | 0.9362 | 0.4251 | 0.1574 | 0.5847 |
+| 0.10 | 0.9362 | 0.4571 | 0.1382 | 0.6143 |
+| 0.15 | 0.9362 | 0.4718 | 0.1303 | 0.6275 |
+| 0.20 | 0.9255 | 0.4847 | 0.1224 | 0.6362 |
+| 0.30 | 0.9096 | 0.5015 | 0.1124 | 0.6465 |
+| 0.40 | 0.8989 | 0.5137 | 0.1058 | 0.6538 |
+| 0.50 | 0.8883 | 0.5285 | 0.0985 | 0.6627 |
+| 0.60 | 0.8883 | 0.5370 | 0.0952 | 0.6693 |
+| 0.75 | 0.8617 | 0.5510 | 0.0873 | 0.6722 |
+| 0.90 | 0.8138 | 0.5977 | 0.0681 | 0.6892 |
+| 0.95 | 0.7447 | 0.6542 | 0.0489 | 0.6965 |
 
-也就是说，如果一个人持续奔跑，他的 bbox 中心点在连续帧中会有更大的位移；如果对象接近镜头或远离镜头，bbox 面积会发生变化。
+可以看到，高召回 anomaly vector 的最高 recall 是 `0.9362`，但 precision 只有 `0.4251-0.4718`。如果使用固定阈值 `0.50`，recall 仍有 `0.8883`，precision 是 `0.5285`。
 
-对象间关系特征来自同一帧中的其他 tracks：
-
-| 特征 | 如何计算 |
-|---|---|
-| 最近对象距离 | 当前对象中心点到其他对象中心点的最小距离 |
-| 平均对象距离 | 当前对象到其他对象中心点距离的均值 |
-| 近邻数量 | 半径 `0.1 / 0.2 / 0.3` 内有多少其他对象 |
-| bbox overlap | 当前对象 bbox 和其他对象 bbox 的 IoU / overlap count |
-| 同类近邻数量 | 距离较近且类别相同的对象数量 |
-| 最近对象类别 | 最近邻对象属于人、车辆、非机动车还是其他类别 |
-| 边界距离 | 当前对象中心点到画面边界的最小距离 |
-
-这些统计量会被归一化后作为 side features 输入模型。当前主方法中 side features 维度是 `125`，其中包含基础 bbox 运动信息、对象间关系统计，以及部分 token 数量/轨迹长度统计。
-
-最终模型不是输出视频级异常，而是对每个 object-event 输出一个对象级异常分数：
+对于 token compression，比较合理的使用方式是：
 
 ```text
-同一事件里有多个 object
--> 每个 object 单独打分
--> 分数最高的对象就是模型认为最可能异常的对象
+高异常分数对象：保留 token
+中等分数对象：轻度 merge
+低异常分数对象和背景：强 merge / prune
 ```
 
-具体实现时，每个 object-event 会经过以下几步：
+也就是说，它不一定直接作为最终报警器，而是更适合作为压缩策略的前置筛选器。
 
-1. **对象 token 聚合。**
+## 4. Tracking 阶段遇到的困难
 
-   同一个 object 在每一帧里覆盖的 token 数量不同，所以先把每帧变长的 object tokens 聚合成一个帧级对象向量。这样可以把“一帧中这个对象的视觉证据”压成固定维度表示。
+虽然单帧 object binding 的 token recall 已经能做到 `0.95+`，但 binding 后 tracking 仍然明显掉点。当前最好 tracking 结果如下：
 
-2. **跨帧聚合。**
+| 指标 | 数值 |
+|---|---:|
+| Detection Precision | 0.5970 |
+| Detection Recall | 0.2657 |
+| Detection F1 | 0.3677 |
+| Mean IDF1 | 0.3603 |
+| Track Purity | 0.8469 |
 
-   一个 object-event 包含多帧对象向量。模型再把这些帧级向量聚合成一个 object-event embedding，用来表示“这个对象在这一段时间里的整体状态”。
-
-3. **上下文与背景融合。**
-
-   target object embedding 会和同事件其他对象、真实背景、运动/关系特征融合。这样模型不只看对象外观，也能利用“对象和场景/其他对象之间的关系”。
-
-4. **与 anomaly vectors 比较。**
-
-   最终 object-event embedding 与 normal/anomaly vectors 计算相似度，得到对象级异常分数。
-
-## Anomaly Vector 如何得到
-
-不是直接训练一个普通二分类 head，而是更接近 AnomalyCLIP 的思路：先用文本语义初始化 normal / anomaly 方向，再通过对象级监督微调这些方向。
+这个结果说明：tracking 的问题不是轨迹内部完全混乱。Track purity 有 `0.8469`，说明一旦连成 track，内部相对还算纯。真正问题是：
 
 ```text
-normal / anomaly prompts
--> Qwen tokenizer + frozen text embedding
--> text prototype base
--> trainable projection / residual
--> normal / anomaly vectors
+object proposal 覆盖率低
+有效 track 数量不够
+很多对象在 proposal / association 阶段丢失
 ```
 
-当前 prototype 设置：
+### 4.1 token recall 高不等于 proposal recall 高
 
-| 类型 | 数量 | 作用 |
-|---|---:|---|
-| normal prototypes | 4 | 表示正常行人、车辆、普通物体运动 |
-| generic anomaly prototypes | 2 | 表示通用异常行为 |
-| 具体异常类型 prototypes | 每类 3 个 | 覆盖行人动作异常、非机动车异常、机动车异常、打斗/群体异常、物体交互异常 |
-| 稀有异常 prototype | 1 | 作为开放集异常辅助方向 |
-| 总数 | 22 | 共同参与对象异常打分 |
+低阈值可以选中很多 GT object tokens，但这些 token 可能是离散的、断裂的、混入背景的。把 token 变成 object proposal 时，需要经过连通域、bbox 合成、NMS 和 frame cap，这一步会丢掉很多对象。
 
-推理时主要使用 binary anomaly score：
+### 4.2 低阈值会导致 proposal 爆炸
+
+为了提高召回，我们试过更激进的 proposal 策略。结果是 proposal 和 track 数量暴涨，但 detection recall 没有明显提升：
+
+| 方法 | Det Precision | Det Recall | Det F1 | Pred Tracks |
+|---|---:|---:|---:|---:|
+| 当前最好 tracking | 0.5970 | 0.2657 | 0.3677 | 4149 |
+| seed 诊断版 | 0.3285 | 0.2574 | 0.2886 | 20109 |
+
+这说明只是放低阈值或增加 seed，并不能自动提升 tracking recall，反而会产生大量碎片 track 和假对象。
+
+### 4.3 多对象近距离场景中 token 容易粘连
+
+在人群、车辆密集、骑车人接近行人的场景里，多个对象的响应区域会连成一片。连通域方法容易把多个对象合成一个 proposal，或者把一个对象拆成多个碎片。
+
+### 4.4 Association ambiguity 很高
+
+当前 tracking 里存在大量候选关联歧义：
 
 ```text
-score(object) = P(anomaly | object)
+ambiguous proposal candidates ≈ 390k
+ambiguous track candidates    ≈ 474k
 ```
 
-异常小类原型主要作为辅助训练信号，让 anomaly vector 不至于全部塌缩到一个粗糙方向。
+这说明跨帧关联时，很多 proposal 的位置、外观和类别都太相似，简单的 IoU + appearance matching 很难稳定判断身份。
 
-更具体地说，训练时对象向量和这些 normal / anomaly vectors 做相似度比较。如果对象是真实异常对象，训练会把它拉近 anomaly vectors；如果对象是正常对象，训练会把它拉近 normal vectors。这样得到的 anomaly vector 不是凭空学出的分类权重，而是“文本语义初始化 + 对象级异常监督”共同形成的可学习方向。
+## 5. 当前结论
 
-## 训练设置
+1. Object binding 的单帧 token recall 已经可以做到很高，推荐高召回工作点是 `threshold=0.30-0.40`。
+2. Anomaly vector 的高召回版本在固定阈值 `0.50` 下 recall 可以达到 `0.8883`，低阈值最高可到 `0.9362`。
+3. 当前最大瓶颈是 binding 后的 tracking：token-level recall 高，但 object proposal / track recall 低。
+4. 后续不应只继续降低 binding 阈值，而应改进 token-to-instance proposal，例如使用 object query / slot-style decoder 替代简单连通域。
 
-| 项目 | 设置 |
-|---|---|
-| 训练单位 | 一个 object 在一个事件片段内的 object-event token sequence |
-| 视觉特征 | 冻结 Qwen3-VL ViT token cache |
-| 训练样本 | 4371 个 object-event |
-| 训练正样本 | 518 |
-| 训练负样本 | 3853 |
-| 验证样本 | 1251 个 object-event |
-| 验证异常对象 | 147 |
-| 验证正常对象 | 1104 |
-| 阈值口径 | 固定 threshold = 0.5 |
-| 训练目标 | 对象级 normal / abnormal 判断 |
+## 6. 下一步建议
 
-损失函数由几部分组成：
-
-| Loss | 目的 |
-|---|---|
-| binary anomaly loss | 判断对象是否异常 |
-| category auxiliary loss | 用具体异常类型辅助约束异常方向 |
-| threshold margin loss | 让异常分数推到 0.5 以上，正常分数压到 0.5 以下 |
-| ranking loss | 异常对象分数应高于正常对象 |
-| hard negative loss | 压低容易误报的正常对象 |
-| same-event negative constraint | 同一个异常事件里的正常对象不能被误判成异常 |
-| prototype separation loss | 防止 normal / anomaly vectors 混在一起 |
-| text anchor loss | 防止可学习向量偏离文本语义太远 |
-
-## 核心指标
-
-当前主方法在固定阈值 `0.5` 下表现比较均衡：Precision、Recall、F1 和 FPR 都比较稳定，适合作为当前组会主方法。
-
-| 指标 | 数值 | 含义 |
-|---|---:|---|
-| Accuracy | 0.9448 | 所有正常/异常对象整体判断正确率 |
-| Precision | 0.7566 | 被判为异常的对象里，有多少真的异常 |
-| Recall | 0.7823 | 真实异常对象里，有多少被找出来 |
-| F1 | 0.7692 | Precision 和 Recall 的综合指标 |
-| FPR | 0.0335 | 正常对象被误判成异常的比例 |
-| AUROC | 0.9509 | 不固定阈值时的排序能力 |
-| AUPRC | 0.8132 | 异常样本较少时更关注的排序指标 |
-| Event Top1 Recall | 0.9138 | 每个异常事件中，最高分对象命中异常对象的比例 |
-
-这个结果说明两点：
+短期建议做三组 tracking 对照：
 
 ```text
-1. 对象级 anomaly vector 已经有较好的排序能力。
-2. 固定阈值下不能只追求召回率，否则会把同场景正常对象也误判成异常。
+spatial_instance_coverage_recall:
+  threshold = 0.30 / 0.35 / 0.40
+
+soft_edge_classrestore:
+  threshold = 0.35 / 0.40
 ```
 
-分类型观察上，机动车异常、打斗/群体秩序异常相对更容易；行人动作异常和物体状态/交互异常更难。稀有开放集异常样本很少，不能据此说明开放集异常已经解决。
-
-## 不同阈值下的表现
-
-异常分数越过阈值就判为异常。阈值越低，模型越容易报警，Recall 通常更高，但正常误报也会增加；阈值越高，模型更保守，Precision 通常更高，但会漏掉更多异常对象。
-
-| Threshold | Accuracy | Recall | Precision | FPR | F1 |
-|---:|---:|---:|---:|---:|---:|
-| 0.05 | 0.9153 | 0.8367 | 0.6000 | 0.0743 | 0.6989 |
-| 0.10 | 0.9281 | 0.8299 | 0.6524 | 0.0589 | 0.7305 |
-| 0.20 | 0.9353 | 0.8027 | 0.6941 | 0.0471 | 0.7445 |
-| 0.30 | 0.9392 | 0.7891 | 0.7205 | 0.0408 | 0.7532 |
-| 0.40 | 0.9432 | 0.7891 | 0.7436 | 0.0362 | 0.7657 |
-| 0.50 | 0.9448 | 0.7823 | 0.7566 | 0.0335 | 0.7692 |
-| 0.60 | 0.9472 | 0.7755 | 0.7755 | 0.0299 | 0.7755 |
-| 0.70 | 0.9456 | 0.7551 | 0.7762 | 0.0290 | 0.7655 |
-| 0.80 | 0.9456 | 0.7415 | 0.7842 | 0.0272 | 0.7622 |
-| 0.90 | 0.9456 | 0.7075 | 0.8062 | 0.0226 | 0.7536 |
-| 0.95 | 0.9424 | 0.6735 | 0.8049 | 0.0217 | 0.7333 |
-
-从表中可以看到：
+评估时不要只看 token recall，而要看：
 
 ```text
-1. 如果更关心不要漏异常，可以把阈值降到 0.1-0.2，Recall 会升高，但 FPR 也会上升。
-2. 如果更关心报警可靠性，可以把阈值提高到 0.6-0.9，Precision 会更高，但 Recall 会下降。
-3. 固定阈值 0.5 是当前折中点：Recall 仍有 0.7823，同时 FPR 控制在 0.0335。
+Detection Recall
+Detection Precision
+Detection F1
+Mean IDF1
+Track Purity
+Pred Track 数量
 ```
 
-## 召回优先训练探索
+如果高召回阈值不能提升 downstream Det Recall，就说明真正瓶颈在 proposal 形成和跨帧身份关联，而不是 token score 本身。
 
-也尝试了更偏召回的训练策略，它和当前主方法不是同一个取舍：主方法强调低误报和固定阈值稳定性；召回优先探索版强调尽量不要漏掉异常对象。
+## 7. 结果来源
 
-两种做法的核心区别如下：
-
-| 对比项 | 当前主方法：低误报稳定型 | 召回优先探索版 |
-|---|---|---|
-| 训练目标 | 固定阈值下 Precision / Recall / FPR 更均衡 | 尽量提高异常 Recall |
-| 正负样本策略 | 正样本比例较克制，同时更强调 hard negative | 提高异常样本权重，让模型更容易把可疑对象判为异常 |
-| 正常对象约束 | 更强的正常对象约束和 FPR guard | 正常约束相对放松，允许更多对象被判为可疑 |
-| 同事件正常对象 | 强调压低同一异常事件里的正常对象分数 | 也使用同事件 hard negative，但更偏向保护异常召回 |
-| 阈值附近训练 | 希望异常过 0.5、正常低于 0.5，同时控制误报 | 更强地推动异常对象越过阈值 |
-| 结果倾向 | 误报低，整体更稳 | 召回高，但误报增加 |
-
-可以理解为：
+Object binding:
 
 ```text
-当前主方法：
-  更像“报警要更可靠”，所以 FPR 低、Precision 更好。
-
-召回优先探索版：
-  更像“异常对象尽量别漏”，所以 Recall 更高，但会多保留正常对象。
+/mnt/data/mfl/token_compression/data/token_compression/20260613_data/results/qwen3vl_yolo_spatial_instance_coverage_recall_v13_20260707/metrics.json
+/mnt/data/mfl/token_compression/data/token_compression/20260613_data/results/qwen3vl_yolo_spatial_soft_edge_classrestore_v16_20260707/metrics.json
 ```
 
-### 召回优先探索版的具体指标
-
-固定阈值 `0.5` 下，召回优先探索版的结果如下：
-
-| 指标 | 数值 | 含义 |
-|---|---:|---|
-| Accuracy | 0.9000 | 所有正常/异常对象整体判断正确率 |
-| Precision | 0.5285 | 被判为异常的对象里，有多少真的异常 |
-| Recall | 0.8883 | 真实异常对象里，有多少被找出来 |
-| F1 | 0.6627 | Precision 和 Recall 的综合指标 |
-| FPR | 0.0985 | 正常对象被误判成异常的比例 |
-| AUROC | 0.9571 | 不固定阈值时的排序能力 |
-| AUPRC | 0.7631 | 异常样本较少时更关注的排序指标 |
-| Event Top1 Recall | 0.9420 | 每个异常事件中，最高分对象命中异常对象的比例 |
-| TP / FP / TN / FN | 167 / 149 / 1363 / 21 | 混淆矩阵 |
-
-它相比当前主方法的主要变化是：
+Anomaly vector:
 
 ```text
-Recall 从 0.7823 提高到 0.8883，
-但 Precision 从 0.7566 降到 0.5285，
-FPR 从 0.0335 升到 0.0985。
+/home/expand_disk/code_repository/mfl/token_compression/docs/reports/assets/20260630_anomaly_vector/v55/metrics.json
 ```
 
-也就是说，它确实更不容易漏异常，但会把更多正常对象也判成异常。
-
-### 召回优先探索版在不同阈值下的表现
-
-| Threshold | Accuracy | Recall | Precision | FPR | F1 |
-|---:|---:|---:|---:|---:|---:|
-| 0.15 | 0.8771 | 0.9362 | 0.4718 | 0.1303 | 0.6275 |
-| 0.50 | 0.9000 | 0.8883 | 0.5285 | 0.0985 | 0.6627 |
-| 0.75 | 0.9071 | 0.8617 | 0.5510 | 0.0873 | 0.6722 |
-| 0.95 | 0.9282 | 0.7447 | 0.6542 | 0.0489 | 0.6965 |
-
-这个表说明：即使把阈值提高到 `0.75`，召回优先探索版仍然有 `0.8617` 的 Recall，但 FPR 仍高于当前主方法。因此它更适合证明“召回上限还有空间”，暂时不适合作为最终主方法。
-
-## 主要困难
-
-1. **异常召回和误报率存在明显拉扯。**
-
-   拉高 Recall 往往会把同场景正常对象也抬高，导致 FPR 上升。这个问题在同一个异常事件中尤其明显：异常对象旁边的正常对象也有相似场景背景。
-
-2. **行人动作异常仍然难。**
-
-   这类异常包含奔跑、摔倒、攀爬、徘徊等动作，很多证据来自连续多帧步态或姿态变化。单个 object-event 的平均视觉表征容易被正常帧稀释。
-
-3. **稀有开放集异常样本太少。**
-
-   当前这类异常召回看起来高，但验证样本只有 3 个，不具备统计说服力。它更适合作为开放集测试，不适合作为强监督类别。
-
-4. **固定阈值校准仍然关键。**
-
-   AUROC 高说明排序能力不错，但实际部署需要固定阈值可用。后续不能只追求 AUROC，需要继续看 `threshold=0.5` 下的 Precision / Recall / FPR。
-
-5. **当前仍是离线 object-event 判断。**
-
-   真实 VAD 场景中，系统只能看到历史帧，不能提前知道 object track 什么时候结束。下一步需要在线 causal anomaly score，让异常分数随历史帧累积，达到阈值后报警。
-
-## 组会结论
-
-当前 object-level anomaly vector 已经证明可行：Qwen3-VL object tokens 经过对象级聚合后，可以训练出有效的 anomaly vectors。后续最重要的不是继续堆复杂结构，而是围绕三个问题改进：
+Tracking:
 
 ```text
-1. 在不明显增加 FPR 的情况下提高行人动作异常和物体状态/交互异常的召回；
-2. 加强同事件正常对象的 hard negative 约束；
-3. 从离线 object-event 评分升级到在线历史帧累积评分。
+/mnt/data/mfl/token_compression/data/token_compression/20260613_data/results/exp_20260708_v13_binding_tracking_gridcc_mutual_t070/binding_slot_tracking_metrics.json
+/mnt/data/mfl/token_compression/data/token_compression/20260613_data/results/exp_20260708_v18_binding_tracking_gridcc_seeddiag_t068/binding_slot_tracking_metrics.json
 ```
