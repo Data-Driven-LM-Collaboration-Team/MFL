@@ -1,0 +1,16 @@
+{
+  "normal_patch_count": 2604400,
+  "abnormal_patch_count": 37606,
+  "ignore_patch_count": 3473194,
+  "normal_mean_anomaly_score": 0.404685709342281,
+  "abnormal_mean_anomaly_score": 0.8271210166269406,
+  "mean_score_gap": 0.4224353072846596,
+  "micro_auroc": 0.9572610356425525,
+  "micro_average_precision": 0.21663787991060418,
+  "tpr_at_0_5": 0.983885550178163,
+  "fpr_at_0_5": 0.2877545691906005,
+  "brier_score": 0.19864726691660936,
+  "ece_15_bins": 0.3964647220189164,
+  "validation_videos": 42,
+  "validation_segments": 56
+}
