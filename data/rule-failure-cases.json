@@ -1,0 +1,50 @@
+{
+  "schema_version": "mfl-public-rule-failure-cases.candidate.v1",
+  "candidate_only": true,
+  "formal_ground_truth": false,
+  "visualization_fps": 1.0,
+  "inference_fps": 4.0,
+  "window_seconds": 8.0,
+  "cases": [
+    {
+      "opaque_id": "rae81e1ca6e822ba",
+      "rule_id": "SR_BICYCLE_IN_PEDESTRIAN_ZONE",
+      "image": "images/rule-failure-bicycle-rae81e.png",
+      "decision": "NORMAL",
+      "actor_action": "person riding bicycle across plaza",
+      "region_relation": "bicycle moving through pedestrian zone",
+      "counterevidence": "no visible restriction or prohibition sign",
+      "audit_interpretation": "rule_application_failure"
+    },
+    {
+      "opaque_id": "r32a33802d129aae",
+      "rule_id": "SR_SKATE_OR_ROLLER_IN_PEDESTRIAN_ZONE",
+      "image": "images/rule-failure-skateboard-r32a338.png",
+      "decision": "NORMAL",
+      "actor_action": "people walking and one person on skateboard",
+      "region_relation": "person on skateboard moving within pedestrian area",
+      "strict_valid": false,
+      "audit_interpretation": "decision_evidence_inconsistency_and_output_contract_failure"
+    },
+    {
+      "opaque_id": "r900fffd5f0b9de7",
+      "rule_id": "SR_NONMOTOR_WRONG_WAY",
+      "image": "images/rule-failure-wrong-way-r900ff.png",
+      "decision": "NORMAL",
+      "actor_action": "a person riding a bicycle",
+      "region_relation": "the cyclist is moving in the direction of the arrows",
+      "strict_valid": false,
+      "audit_interpretation": "direction_and_perspective_binding_conflict_requires_human_review"
+    },
+    {
+      "opaque_id": "r0c4b2106d40847d",
+      "rule_id": "SR_BLOCKED_ACCESS_BY_STOPPING",
+      "image": "images/rule-failure-blocking-r0c4b2.png",
+      "decision": "NORMAL",
+      "actor_action": "a car driving away",
+      "region_relation": "the car drives past the parked area without blocking access",
+      "strict_valid": true,
+      "audit_interpretation": "candidate_label_quality_risk_requires_human_review"
+    }
+  ]
+}
