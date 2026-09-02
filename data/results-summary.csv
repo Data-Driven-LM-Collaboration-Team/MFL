@@ -1,9 +1,4 @@
-anomaly_type,token_condition,strategy,sample_scope,actual_keep_percent,compression_percent,mean_visual_tokens,candidate_decision_agreement_percent,candidate_anomaly_recall_percent,candidate_normal_specificity_percent,event_content_or_evidence_coverage_percent,full_matched_content_retention_percent,strict_valid_percent,preregistered_gate,note
-physical,uncompressed,FULL,"32 mixed windows; 31 candidate-reviewed decidable",100,0,9510,87.0968,88.8889,84.6154,81.25,100,100,baseline,"Candidate-only reference baseline"
-physical,compressed,TEMP_50,"same 32 windows",50,50,4755,80.6452,77.7778,84.6154,68.75,84.6154,100,fail,"Temporal-only compression degraded decisions and event content"
-physical,compressed,SPACE_25,"same 32 windows",25.0368,74.9632,2381,83.8710,88.8889,76.9231,81.25,92.3077,100,fail,"Slight budget overshoot and more false positives"
-physical,compressed,JOINT_25,"same 32 windows",25,75,2377.5,87.0968,88.8889,84.6154,75,84.6154,100,fail,"Binary result matched FULL but event content retention failed"
-physical,compressed,ADAPT_12P5,"same 32 windows",26.5816,73.4184,2527.90625,90.3226,94.4444,84.6154,87.5,92.3077,100,fail,"Best candidate metrics but target keep budget was 12.5 percent"
-physical,compressed,JOINT_6P25,"same 32 windows",6.25,93.75,594.375,83.8710,83.3333,84.6154,68.75,76.9231,100,fail,"Aggressive compression lost event semantics"
-scene_rule,uncompressed,FULL,"32 positive-only candidate rule anomalies; labels need review",100,0,,,,37.5,,34.375,fail,"Candidate anomaly recall 37.5 percent; accuracy and specificity not reportable"
-scene_rule,compressed,NOT_RUN,"no experiment",,,,,,,,,,not_run,"Uncompressed baseline is not usable; no compression claim"
+anomaly_type,token_condition,representative_strategy,sample_scope,token_summary,main_effect,evidence_effect,preregistered_gate
+physical,uncompressed,FULL,"32 mixed windows; 31 candidate-reviewed decidable","keep 100%; mean 9510","decision agreement 87.1%; anomaly recall 88.9%; normal specificity 84.6%","event-family content match 81.3%",baseline
+scene_rule,uncompressed,FULL,"32 positive-only candidates; labels need review","keep 100%","candidate anomaly recall 37.5%; accuracy and specificity not reportable","evidence coverage 37.5%; strict-valid rate 34.4%",fail
+physical,compressed,"JOINT_25 and ADAPT_12P5","same 32 physical windows","JOINT keep 25%; ADAPT actual keep 26.6%","JOINT agreement 87.1%; ADAPT agreement 90.3% and recall 94.4%","JOINT content match 75.0%; ADAPT content match 87.5%",fail
