@@ -1,4 +1,0 @@
-anomaly_type,token_condition,representative_strategy,sample_scope,token_summary,main_effect,evidence_effect,preregistered_gate
-physical,uncompressed,FULL,"32 mixed windows; 31 candidate-reviewed decidable","keep 100%; mean 9510","decision agreement 87.1%; anomaly recall 88.9%; normal specificity 84.6%","event-family content match 81.3%",baseline
-scene_rule,uncompressed,FULL,"32 positive-only candidates; labels need review","keep 100%","candidate anomaly recall 37.5%; accuracy and specificity not reportable","evidence coverage 37.5%; strict-valid rate 34.4%",fail
-physical,compressed,"JOINT_25 and ADAPT_12P5","same 32 physical windows","JOINT keep 25%; ADAPT actual keep 26.6%","JOINT agreement 87.1%; ADAPT agreement 90.3% and recall 94.4%","JOINT content match 75.0%; ADAPT content match 87.5%",fail
