@@ -1,7 +1,7 @@
 {
   "report_period": "2026-10-13 to 2026-10-19",
   "baseline": {
-    "model": "Qwen3.5-4B",
+    "model": "Frozen multimodal model",
     "backbone_frozen": true,
     "sampling_fps_approx": 4,
     "resolution": "aspect-preserving 720p envelope",
