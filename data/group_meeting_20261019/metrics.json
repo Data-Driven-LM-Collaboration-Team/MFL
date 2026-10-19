@@ -1,0 +1,65 @@
+{
+  "report_period": "2026-10-13 to 2026-10-19",
+  "baseline": {
+    "model": "Qwen3.5-4B",
+    "backbone_frozen": true,
+    "sampling_fps_approx": 4,
+    "resolution": "aspect-preserving 720p envelope",
+    "external_detector": false,
+    "full_tokens_definition": "All native visual tokens after frame sampling and preprocessing"
+  },
+  "compression_comparison": {
+    "reference_definition": "Original pre-run partial assistant object references",
+    "evaluation": "Actual model outputs; invalid outputs and omissions remain in denominators",
+    "methods": {
+      "full": {
+        "visual_token_deletion_pct": 0.0,
+        "anomalous_object_recall_pct": 44.44444444444444,
+        "anomalous_object_action_label_hit_pct": 33.333333333333336,
+        "object_action_label_joint_hit_pct": 67.10526315789474,
+        "normal_object_matching_coverage_pct": 80.59701492537313,
+        "generation_median_seconds": 41.72596374999557
+      },
+      "prune": {
+        "visual_token_deletion_pct": 90.50526017832712,
+        "anomalous_object_recall_pct": 55.55555555555556,
+        "anomalous_object_action_label_hit_pct": 44.44444444444444,
+        "object_action_label_joint_hit_pct": 63.1578947368421,
+        "normal_object_matching_coverage_pct": 73.13432835820896,
+        "generation_median_seconds": 27.006929000010132
+      },
+      "merge": {
+        "visual_token_deletion_pct": 90.50526017832712,
+        "anomalous_object_recall_pct": 66.66666666666667,
+        "anomalous_object_action_label_hit_pct": 66.66666666666667,
+        "object_action_label_joint_hit_pct": 67.10526315789474,
+        "normal_object_matching_coverage_pct": 76.11940298507463,
+        "generation_median_seconds": 26.099303149996558
+      }
+    }
+  },
+  "separate_uncompressed_rule_diagnosis": {
+    "reference_definition": "Source-assisted candidate annotations; automatic matching",
+    "row_normalized_output_percentages": {
+      "ANOMALY": {
+        "ANOMALY": 13.0,
+        "NORMAL": 81.0,
+        "INVALID": 6.0
+      },
+      "NORMAL": {
+        "ANOMALY": 0.0,
+        "NORMAL": 97.5,
+        "INVALID": 2.5
+      }
+    },
+    "not_directly_comparable_to_compression_comparison": true
+  },
+  "limitations": [
+    "References are not independently human-verified complete ground truth",
+    "Reported percentages are diagnostic metrics, not formal object AP or video AUC",
+    "Normal-object matching coverage is not normal classification accuracy",
+    "Generation duration depends on answer length and is not full end-to-end latency",
+    "The merger is constrained spatial/adjacent-time feature averaging, not verified identity tracking",
+    "The trained token anomaly semantic branch was not integrated in this comparison"
+  ]
+}
