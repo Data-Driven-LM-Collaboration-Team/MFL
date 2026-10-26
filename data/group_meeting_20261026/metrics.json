@@ -1,0 +1,401 @@
+{
+  "report_period": "2026-10-20 to 2026-10-26",
+  "visual_evaluation_as_of": "2026-10-25",
+  "scope": "Fixed common 189 clips; four-level main table uses 167 visually supported abnormal clips",
+  "cohort": {
+    "planned_experiment": 232,
+    "reviewed_common_clips": 189,
+    "supported_anomaly": 167,
+    "supported_normal": 3,
+    "policy_insufficient": 19,
+    "outside_this_four_level_audit": 43,
+    "paired_readable_anomaly": 140
+  },
+  "metric_type": "native_visual_review_not_independent_human_ground_truth",
+  "levels": [
+    {
+      "population": "167段支持异常",
+      "model": "8B",
+      "level": 1,
+      "label": "异常检出",
+      "passed": 117,
+      "denominator": 167,
+      "percent": 70.05988023952095,
+      "definition": "在复核支持异常的片段中，模型报告存在有效异常主张；类别或后级定位错误不自动抹掉检出。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "8B",
+      "level": 2,
+      "label": "正确事件及大类",
+      "passed": 111,
+      "denominator": 167,
+      "percent": 66.46706586826348,
+      "definition": "前一级通过，且至少一项实际发生的异常事件及G01–G06大类正确；只匹配类码不算正确。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "8B",
+      "level": 3,
+      "label": "核心对象与角色",
+      "passed": 11,
+      "denominator": 167,
+      "percent": 6.58682634730539,
+      "definition": "前两级通过，所有核心异常对象的身份、异常归属与角色正确，无虚构主体、身份互换或重复实体。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "8B",
+      "level": 4,
+      "label": "异常对象中心九宫格",
+      "passed": 3,
+      "denominator": 167,
+      "percent": 1.7964071856287425,
+      "definition": "对象级通过，各核心异常对象至少有可核查位置，且输出标注帧的框中心九宫格全部正确。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "8B",
+      "level": 1,
+      "label": "异常检出",
+      "passed": 117,
+      "denominator": 140,
+      "percent": 83.57142857142857,
+      "definition": "在复核支持异常的片段中，模型报告存在有效异常主张；类别或后级定位错误不自动抹掉检出。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "8B",
+      "level": 2,
+      "label": "正确事件及大类",
+      "passed": 111,
+      "denominator": 140,
+      "percent": 79.28571428571428,
+      "definition": "前一级通过，且至少一项实际发生的异常事件及G01–G06大类正确；只匹配类码不算正确。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "8B",
+      "level": 3,
+      "label": "核心对象与角色",
+      "passed": 11,
+      "denominator": 140,
+      "percent": 7.857142857142857,
+      "definition": "前两级通过，所有核心异常对象的身份、异常归属与角色正确，无虚构主体、身份互换或重复实体。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "8B",
+      "level": 4,
+      "label": "异常对象中心九宫格",
+      "passed": 3,
+      "denominator": 140,
+      "percent": 2.142857142857143,
+      "definition": "对象级通过，各核心异常对象至少有可核查位置，且输出标注帧的框中心九宫格全部正确。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "27B",
+      "level": 1,
+      "label": "异常检出",
+      "passed": 134,
+      "denominator": 167,
+      "percent": 80.23952095808383,
+      "definition": "在复核支持异常的片段中，模型报告存在有效异常主张；类别或后级定位错误不自动抹掉检出。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "27B",
+      "level": 2,
+      "label": "正确事件及大类",
+      "passed": 115,
+      "denominator": 167,
+      "percent": 68.8622754491018,
+      "definition": "前一级通过，且至少一项实际发生的异常事件及G01–G06大类正确；只匹配类码不算正确。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "27B",
+      "level": 3,
+      "label": "核心对象与角色",
+      "passed": 25,
+      "denominator": 167,
+      "percent": 14.97005988023952,
+      "definition": "前两级通过，所有核心异常对象的身份、异常归属与角色正确，无虚构主体、身份互换或重复实体。"
+    },
+    {
+      "population": "167段支持异常",
+      "model": "27B",
+      "level": 4,
+      "label": "异常对象中心九宫格",
+      "passed": 7,
+      "denominator": 167,
+      "percent": 4.191616766467066,
+      "definition": "对象级通过，各核心异常对象至少有可核查位置，且输出标注帧的框中心九宫格全部正确。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "27B",
+      "level": 1,
+      "label": "异常检出",
+      "passed": 111,
+      "denominator": 140,
+      "percent": 79.28571428571428,
+      "definition": "在复核支持异常的片段中，模型报告存在有效异常主张；类别或后级定位错误不自动抹掉检出。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "27B",
+      "level": 2,
+      "label": "正确事件及大类",
+      "passed": 98,
+      "denominator": 140,
+      "percent": 70.0,
+      "definition": "前一级通过，且至少一项实际发生的异常事件及G01–G06大类正确；只匹配类码不算正确。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "27B",
+      "level": 3,
+      "label": "核心对象与角色",
+      "passed": 21,
+      "denominator": 140,
+      "percent": 15.0,
+      "definition": "前两级通过，所有核心异常对象的身份、异常归属与角色正确，无虚构主体、身份互换或重复实体。"
+    },
+    {
+      "population": "双方可读的140段异常子集",
+      "model": "27B",
+      "level": 4,
+      "label": "异常对象中心九宫格",
+      "passed": 6,
+      "denominator": 140,
+      "percent": 4.285714285714286,
+      "definition": "对象级通过，各核心异常对象至少有可核查位置，且输出标注帧的框中心九宫格全部正确。"
+    }
+  ],
+  "first_failure_frontier": [
+    {
+      "model": "8B",
+      "stage": "输出不可读",
+      "count": 27,
+      "denominator": 167,
+      "percent": 16.16766467065868
+    },
+    {
+      "model": "8B",
+      "stage": "未检出异常",
+      "count": 23,
+      "denominator": 167,
+      "percent": 13.77245508982036
+    },
+    {
+      "model": "8B",
+      "stage": "事件或大类不正确",
+      "count": 6,
+      "denominator": 167,
+      "percent": 3.592814371257485
+    },
+    {
+      "model": "8B",
+      "stage": "核心对象或角色不正确",
+      "count": 100,
+      "denominator": 167,
+      "percent": 59.88023952095808
+    },
+    {
+      "model": "8B",
+      "stage": "中心九宫格不正确",
+      "count": 8,
+      "denominator": 167,
+      "percent": 4.790419161676647
+    },
+    {
+      "model": "8B",
+      "stage": "四级全部通过",
+      "count": 3,
+      "denominator": 167,
+      "percent": 1.7964071856287425
+    },
+    {
+      "model": "27B",
+      "stage": "输出不可读",
+      "count": 0,
+      "denominator": 167,
+      "percent": 0.0
+    },
+    {
+      "model": "27B",
+      "stage": "未检出异常",
+      "count": 33,
+      "denominator": 167,
+      "percent": 19.760479041916167
+    },
+    {
+      "model": "27B",
+      "stage": "事件或大类不正确",
+      "count": 19,
+      "denominator": 167,
+      "percent": 11.377245508982035
+    },
+    {
+      "model": "27B",
+      "stage": "核心对象或角色不正确",
+      "count": 90,
+      "denominator": 167,
+      "percent": 53.89221556886228
+    },
+    {
+      "model": "27B",
+      "stage": "中心九宫格不正确",
+      "count": 18,
+      "denominator": 167,
+      "percent": 10.778443113772456
+    },
+    {
+      "model": "27B",
+      "stage": "四级全部通过",
+      "count": 7,
+      "denominator": 167,
+      "percent": 4.191616766467066
+    }
+  ],
+  "conditional_pass_rates": [
+    {
+      "model": "8B",
+      "transition": "异常检出 → 正确事件及大类",
+      "passed": 111,
+      "denominator": 117,
+      "lost": 6,
+      "percent": 94.87179487179486
+    },
+    {
+      "model": "8B",
+      "transition": "正确事件及大类 → 核心对象与角色",
+      "passed": 11,
+      "denominator": 111,
+      "lost": 100,
+      "percent": 9.90990990990991
+    },
+    {
+      "model": "8B",
+      "transition": "核心对象与角色 → 异常对象中心九宫格",
+      "passed": 3,
+      "denominator": 11,
+      "lost": 8,
+      "percent": 27.27272727272727
+    },
+    {
+      "model": "27B",
+      "transition": "异常检出 → 正确事件及大类",
+      "passed": 115,
+      "denominator": 134,
+      "lost": 19,
+      "percent": 85.82089552238806
+    },
+    {
+      "model": "27B",
+      "transition": "正确事件及大类 → 核心对象与角色",
+      "passed": 25,
+      "denominator": 115,
+      "lost": 90,
+      "percent": 21.73913043478261
+    },
+    {
+      "model": "27B",
+      "transition": "核心对象与角色 → 异常对象中心九宫格",
+      "passed": 7,
+      "denominator": 25,
+      "lost": 18,
+      "percent": 28.000000000000004
+    }
+  ],
+  "output_availability": [
+    {
+      "model": "8B",
+      "reviewed": 189,
+      "readable": 158,
+      "unreadable": 31,
+      "readable_percent": 83.5978835978836,
+      "strict_contract_valid": 136,
+      "normal_correct": 0,
+      "normal_false_positive": 3,
+      "strict_contract_note": "严格schema/关系契约，与可读异常语义的四层级复核分开计数"
+    },
+    {
+      "model": "27B",
+      "reviewed": 189,
+      "readable": 189,
+      "unreadable": 0,
+      "readable_percent": 100.0,
+      "strict_contract_valid": 187,
+      "normal_correct": 0,
+      "normal_false_positive": 3,
+      "strict_contract_note": "严格schema/关系契约，与可读异常语义的四层级复核分开计数"
+    }
+  ],
+  "protocol": {
+    "source_sampling_fps": 10,
+    "include_unique_last_native_frame": true,
+    "classes": {
+      "G01": "人际攻击或强取",
+      "G02": "物品破坏或危险抛掷",
+      "G03": "火烟及危险操作",
+      "G04": "事故或危险状态",
+      "G05": "交通及骑行危险",
+      "G06": "区域违规及占用"
+    },
+    "8B": {
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "max_new_tokens_in_common_189_snapshot": 8192
+    },
+    "27B": {
+      "model_id_alias": "Qwen3.8-27B",
+      "weights_verified": false,
+      "revision_verified": false,
+      "transport_carrier_fps": 2,
+      "server_internal_sampling_verified": false,
+      "actual_output_budgets_all_232": {
+        "4096": 26,
+        "8192": 206
+      }
+    },
+    "request_decoding": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20
+    },
+    "semantic_retries": 0
+  },
+  "limitations": [
+    "Reference consists of Codex native visual adjudications, not independently human-verified ground truth",
+    "Main four levels are cumulative pass rates on 167 abnormal clips, not whole-dataset accuracy",
+    "Paired 140-clip analysis is a selected readable subset and does not replace the main population",
+    "3 visually supported normal clips are insufficient for a general false-positive-rate estimate",
+    "19 policy-insufficient clips are not assigned forced binary labels",
+    "Spatial metric is abnormal-object bbox-center 3x3 grid only; no bbox IoU or mask J&F",
+    "Full anomaly interval accuracy and temporal IoU were not evaluated",
+    "27B server weights and exact frame consumption were not verified; no architecture-only causal claim"
+  ],
+  "provenance": {
+    "raw_response_hashes_checked": 378,
+    "aggregation_recomputed": true,
+    "source_file_sha256": {
+      "FINAL_REVIEWS.json": "45f0a28c3318519a5009ed2f732cdd8cfe0778310b87016ac7dc4a43da5f0b60",
+      "FINAL_METRICS.json": "1f2c0bc6f36012bf63e232b257e28e92ff45a0e67ce65fc720c0ffc59120682d",
+      "COHORT.json": "673763b6c49d5a0d0d53c24b533adfcb4107170dad01e155832a9c4e5e05d26e",
+      "PROTOCOL_FREEZE.json": "bbc69e80a71b3483d27ff838ddeae63c0c237add963046a12a355c05ac7a544b",
+      "PROTOCOL_V1.md": "9b0ec788998d72e9e6e39846a6ff1be1d36fc0a6c0b8e8e2e89038471f01f2b5",
+      "FINAL_VERIFICATION.json": "9f47f4b201d7a3d95ddf783bf005820d125e70ef65cb7c3cdd38d65244c31bb2",
+      "REMOTE_8B_DETAIL.json": "88ca39065174a6531b577f50f70a26be1f550798bf9b83576ed232cd1cd4c49d",
+      "config.json": "431540aef7f79812375972579bce28358bfb36b18b5a63f6ae387d5f424aecf2",
+      "ACTIVE_CONFIG_V2.json": "c8cc38bdeeb7ed024e14b0bc3fd5d046c92bcbfc2c47807b0424cb1302681eb4",
+      "OUTPUT_BUDGET_V2.json": "b6ad36dafba4d2a5c5169094a05d5dd21cb0a5c41a4181902d5e8bdfc7c210e2"
+    },
+    "new_model_calls": 0,
+    "original_outputs_modified": false
+  },
+  "human_verified": false,
+  "eligible_for_formal_supervised_training": false
+}
