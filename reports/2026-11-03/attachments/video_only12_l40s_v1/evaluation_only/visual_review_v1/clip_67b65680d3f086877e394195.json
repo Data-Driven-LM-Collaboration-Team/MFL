@@ -1,0 +1,18 @@
+{
+  "clip_id": "clip_67b65680d3f086877e394195",
+  "source_sha256": "77ddb89742a95af49ea35af926770df68d996353d4d4a2d0f867578f085ed536",
+  "input_tensor_sha256": "98302a0778517e81bb15cd13731793bbd485a9519109bba1f404e74457ce8bc6",
+  "source_tensor_verified": true,
+  "plan_sha256": "6782f07d472151ef60817cd2087bffac76dfbbc77242d5658d09be210885be0a",
+  "plan": "VAD/experiments\\qwen3vl8b_i3_video_only12_l40s_v1_20261102\\evaluation_only\\research_mirror\\qwen3vl8b_i3_video_only12_l40s_v1_20261102\\research_results\\clip_67b65680d3f086877e394195\\anchor90_video\\decision_PLAN.npz",
+  "temporal_groups": 18,
+  "displayed_groups": [
+    0,
+    6,
+    12,
+    17
+  ],
+  "image_input_tokens": 0,
+  "not_attention_or_truth": true,
+  "figure_sha256": "48a9289c45c5eb2da030f72b4cef9bcf6970b93d0529a680b5a4f69752d3d5e2"
+}

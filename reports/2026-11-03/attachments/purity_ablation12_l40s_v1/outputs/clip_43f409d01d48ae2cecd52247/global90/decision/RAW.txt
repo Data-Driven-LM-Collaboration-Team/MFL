@@ -1,0 +1,24 @@
+{
+  "scene": "开敞铺装广场，有树木和长凳，建筑与绿化边界清晰",
+  "events": [
+    {
+      "category": "G06",
+      "start": "F024",
+      "end": "F024",
+      "evidence": "在主步行铺装区，一名穿粉色上衣的人骑着自行车，该区域禁止骑行",
+      "objects": [
+        {
+          "object_id": "骑车人",
+          "appearance": "穿粉色上衣，骑自行车",
+          "role": "direct_participant"
+        ,
+        "abnormal": true
+      ,
+      "kind": "vehicle"
+    }
+  ]
+}
+] 
+,
+  "unresolved": []
+}<|im_end|>

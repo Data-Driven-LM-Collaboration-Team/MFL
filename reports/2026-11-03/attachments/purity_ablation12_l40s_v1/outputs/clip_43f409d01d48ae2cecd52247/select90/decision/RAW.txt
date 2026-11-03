@@ -1,0 +1,24 @@
+{
+  "scene": "开敞铺装广场，有树木和长凳，建筑与绿化边界清晰",
+  "events": [
+    {
+      "category": "G06",
+      "start": "F024",
+      "end": "F024",
+      "evidence": "在主步行铺装区，一名穿白色上衣、深色裤子的人骑着自行车，车轮压在铺装区域上，违反了主步行铺装区禁止骑行的规定",
+      "objects": [
+        {
+          "object_id": "骑车人",
+          "appearance": "穿白色上衣、深色裤子，骑着一辆自行车",
+          "role": "direct_participant"
+        ,
+        "abnormal": true
+      ,
+        "kind": "vehicle"
+      }
+    ]
+  }
+]
+  ,
+  "unresolved": []
+}<|im_end|>

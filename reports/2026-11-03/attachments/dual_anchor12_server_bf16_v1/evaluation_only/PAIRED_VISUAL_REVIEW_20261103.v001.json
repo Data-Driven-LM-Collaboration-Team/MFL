@@ -1,0 +1,1244 @@
+{
+  "scope": "GPU3, original I3 with crops, BF16; same 12 diagnostic anomaly clips; no normal controls. Each of the four arms independently visually reviewed. Formal reference unchanged.",
+  "reviewed_utc": "2026-11-03T05:13:18.106842+00:00",
+  "freeze": "69a8657c0c4a4593803d50c525531da55093d2346f7655ef45c790d1aba4a8d1",
+  "plan_sha256": "af922ce51b5d8d94f08dc19fe1147e4e4f41f23071c44163324ed5bb754f365f",
+  "cost_sha256": "e1d877b0cc051061398fbda8c8163c6ae65ae7f21d6a7c41459f2cf2324ba14b",
+  "all_source_pages_viewed_this_turn": true,
+  "source_view_method": "Images of the pinned full-span contact sheets and native keyframe sheets were reopened in this turn; clips 0bcffd,60592c,67b656 had additional native sheets viewed at higher resolution. F identifiers in model outputs are native indices. Use the frame time mapping, not the contact sheet sequential label.",
+  "categorization": "Exact set of event class codes. Positive binding and real event recognition are judged separately. No time IoU; uncertain early contact and mixed identities are left pending.",
+  "metrics": {
+    "full_native": {
+      "any_binding": {
+        "pending": 1,
+        "yes": 6,
+        "no": 5
+      },
+      "all_binding": {
+        "no": 7,
+        "yes": 5
+      },
+      "event_correct": {
+        "pending": 1,
+        "yes": 7,
+        "no": 4
+      },
+      "category_correct": {
+        "yes": 9,
+        "no": 3
+      },
+      "false_binding": {
+        "yes": 5,
+        "no": 7
+      }
+    },
+    "global90": {
+      "any_binding": {
+        "no": 7,
+        "yes": 5
+      },
+      "all_binding": {
+        "no": 7,
+        "yes": 4,
+        "pending": 1
+      },
+      "event_correct": {
+        "no": 6,
+        "yes": 6
+      },
+      "category_correct": {
+        "yes": 9,
+        "no": 3
+      },
+      "false_binding": {
+        "yes": 3,
+        "no": 8,
+        "pending": 1
+      }
+    },
+    "dual90": {
+      "any_binding": {
+        "pending": 1,
+        "yes": 5,
+        "no": 6
+      },
+      "all_binding": {
+        "no": 9,
+        "yes": 2,
+        "pending": 1
+      },
+      "event_correct": {
+        "pending": 1,
+        "yes": 6,
+        "no": 5
+      },
+      "category_correct": {
+        "yes": 10,
+        "no": 2
+      },
+      "false_binding": {
+        "yes": 6,
+        "no": 5,
+        "pending": 1
+      }
+    },
+    "dual_residual90": {
+      "any_binding": {
+        "pending": 1,
+        "yes": 5,
+        "no": 6
+      },
+      "all_binding": {
+        "pending": 1,
+        "no": 8,
+        "yes": 3
+      },
+      "event_correct": {
+        "pending": 1,
+        "yes": 6,
+        "no": 5
+      },
+      "category_correct": {
+        "yes": 8,
+        "no": 4
+      },
+      "false_binding": {
+        "pending": 1,
+        "yes": 5,
+        "no": 6
+      }
+    }
+  },
+  "rows": [
+    {
+      "clip_id": "clip_0bcffd8678ef479a12e9f485",
+      "source_observation": "完整70帧和原分辨率锚点显示白T灰短裤者向左缘蓝衣者反复伸臂击推，蓝衣弯低受影响；左缘裁切，具体抓握/起因/伤情不补。",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\010_clip_0bcffd8678ef479a12e9f485\\overview_01.jpg": "c8133e775df441db8e91d058a1f6ecd277f18bd64c40a74eb56b35e54120033b",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\010_clip_0bcffd8678ef479a12e9f485\\overview_02.jpg": "27fa9463d6a27744bc18a6ef88336a6b5a4d89e439b81433b7cc75a8ef72d8e2",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\010_clip_0bcffd8678ef479a12e9f485\\native_keyframes.jpg": "8c58de649c26738513f7f1475e23920eddb8b379cbc0378d701298105a159757",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_0bcffd8678ef479a12e9f485\\annotation.original.json": "d7843ce9ee9853f5b0480832989ff44b6e8220be9ccd68549ff0170639842303"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0bcffd8678ef479a12e9f485.v001.json",
+      "previous_source_receipt_sha256": "20c1936afaed1bc45c05dc2e716e10d947f45c0f64f54f18b211cf46e207d9e3",
+      "verdicts": {
+        "full_native": {
+          "any_binding": null,
+          "all_binding": false,
+          "event_correct": null,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "原生F000–009仅约0–0.3秒，白衣灰短裤/蓝衣受影响者可区分，但左缘开头具体施力证据不足，不能用后段追认；蓝衣被明确标为异常。",
+          "files": {
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/DECISION_PROMPT.json": "b026d1ebf97fe8e5ac919a67e1b0ffe6beefa39fddc6e93d50e368dbdb6c33a8",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/DECISION_SCHEMA.json": "f65917a027dab0a6baf259e7471a5bf87645176b3503c76b07c93715042336aa",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/PREDICTION.json": "d523eb1c9e5cfed8212563cd49548a10864472402ae031fad6c3493b7d0004d7",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/TERMINAL.json": "72caaf642b6c968ef1232d159d4a76a0c5472e68c33b61133fbebefccd95de37",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/decision/GENERATED_TOKENS.jsonl": "b183bff9c59945652adbfdedf6487b24a26181f14fb325e431025dc15c7e0393",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/decision/GENERATION_START.json": "4d1c89eb2fda3b86cae6e6b833635c404715b3f9c7c62939ba8f007e920aa13c",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/decision/INPUT.json": "08c144596f6bb193a8a5be9ff2b65630a1e6c547eebf9efeabf116b4607d9f6d",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/decision/RAW.txt": "1fce800121a06ca2f97b42dd92f8e277016a9e7f44bf376e742aae4b6e53937a",
+            "research_results/clip_0bcffd8678ef479a12e9f485/full_native/decision/RESPONSE.json": "35b5a44eb18f9defe4d6f011c53af55d1df2866369e883db964f24d7dc454d3f"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "F045–069的追抢棕包、夺回控制权未成立，人物条目又把白衣写为被追者；额外把受影响者判异常。",
+          "files": {
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision_PLAN.npz": "779aee16affac0af13c2f20f8141ebe0a3b14b1ed00568b58501b86e08505011",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/DECISION_PROMPT.json": "5afca37e69befd9d698e2a71ce856d3fcd2168ad59a2e993e4e95348d34b2c89",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/DECISION_SCHEMA.json": "f65917a027dab0a6baf259e7471a5bf87645176b3503c76b07c93715042336aa",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/PREDICTION.json": "321661f97f4b42ca81da46e87936cae58da94277a929353f6f0ba954e9c8274a",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/TERMINAL.json": "0bd82ef95f253a6adaf15523a3821d0b7e74a553b6dea14159ab4f73cf696352",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision/GENERATED_TOKENS.jsonl": "a712a6cc800823b84e8734151bb256ad566b926742385c072cb474f1f7642dce",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision/GENERATION_START.json": "f1c1c444798ece416415eda0bab7cbf6f8df6329431bd0a96f6cd72ef0f6461a",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision/INPUT.json": "020dcac8e99dbd8ccbcd28556be8ab7f733ee8e756d8276d2e6362fbf799b0ba",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision/RAW.txt": "93115512e9ecdda4d8588c0c16cfa2e39aedacdb74923bc8c62641e1c9cc6bef",
+            "research_results/clip_0bcffd8678ef479a12e9f485/global90/decision/RESPONSE.json": "ef10a6084b0eed1779517dd3a87f18051f4041deb899c48328d9701c1e3cf0ec"
+          }
+        },
+        "dual90": {
+          "any_binding": null,
+          "all_binding": false,
+          "event_correct": null,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "白衣/深衣可辨，F000–033四条都具体声称双手拖拽、被拖着走；与可见伸臂击推的动作边界留待定。深衣受影响者被标为异常。",
+          "files": {
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision_PLAN.npz": "29c5ae3f9eb6b7b14722db4a787e044e24955a295495b376f2745f4bf91864ef",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/DECISION_PROMPT.json": "296fa704c8c7c3373bec1fcbc2e8e195db67b18884c85606de77bf6f698aee39",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/DECISION_SCHEMA.json": "f65917a027dab0a6baf259e7471a5bf87645176b3503c76b07c93715042336aa",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/PREDICTION.json": "d1fa26c307b85a9a1525d4cfaf0e7ea539577588d29dc9c30fe053a6a9e3b6f2",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/TERMINAL.json": "519e014afdbd1f1541ef770093c74c421ef104307e78d2de6a3f49ca772337b8",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision/GENERATED_TOKENS.jsonl": "44202d9288bc09b1ab2efb618c938574793375f152c6bfde74d51beb5c95ee43",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision/GENERATION_START.json": "ee924f6179b4a84dfd878dd162a777955c63c1d1bc2ad25d68ccabc6549d44e5",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision/INPUT.json": "a2c77a3e4c08b0b8bc37b9dd873a05b25f879642d1f9bc163e821ac9220899b8",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision/RAW.txt": "7c335a79b057707986bae77989ceffd0c375220588eb301acc62ade83f5ef165",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual90/decision/RESPONSE.json": "65f0bf10b01eb194354a9dadf75ae4e354e6360f51670526800da720fcc8972d"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": null,
+          "all_binding": null,
+          "event_correct": null,
+          "category_correct": true,
+          "false_binding": null,
+          "reason": "F000–006仅约0–0.2秒，左缘遮挡；白衣挥臂/拉扯及深衣被拉后退的关系在此窗不可确认。深衣标false；白衣在此窗的异常归属待定。",
+          "files": {
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision_PLAN.npz": "25f6e265180e891aaebfa77c18fa9ade99672e859670fdd372639ca4cbbe0458",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/DECISION_PROMPT.json": "71f7e268b34cba5dab0fbd88d862f8f85b7c85f014275a0ddd196a3f9b5dc05c",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/DECISION_SCHEMA.json": "f65917a027dab0a6baf259e7471a5bf87645176b3503c76b07c93715042336aa",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/PREDICTION.json": "0077c223bc3f99437d5c7a4452d83f40e78aefa5a8d509d19bd62a9618b0aa5f",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/TERMINAL.json": "1f98f859e8e0f939f99c5589c2ab0b1cc7f70b97d2e13d3167a5b00a61b81083",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/TERMINAL.json.part": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision/GENERATED_TOKENS.jsonl": "b13e70d10d746e76fdbd1d31b92977481899fdae142996b3271b895ceb8f6f23",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision/GENERATION_START.json": "4042b2fe339460cd474bddf6b283e690fb6a2246096a50d3052d538d398f592f",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision/INPUT.json": "87e901bf5ca1b35f22de2aacd2d5482f947cf2a8c55bdd385fe0bd6706e574ac",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision/RAW.txt": "f4c4423443a405e47c2588049b99cacbf43c71887eedf40394e8912c5d41175c",
+            "research_results/clip_0bcffd8678ef479a12e9f485/dual_residual90/decision/RESPONSE.json": "6d42241dea5465bdc145feda24294a06ed89661ad86a876ab795cc035f800c97"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_0e3851224f7f78427ce20532",
+      "source_observation": "完整62帧及原生锚点可见深外套亮蓝长裤者两次主动将黑包抛高落地，再稳定弯腰拾取；前景深外套卡其裤长发者独立站立。拾包不是攻击/强取，未见人员跌倒。",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\013_clip_0e3851224f7f78427ce20532\\overview_01.jpg": "c7fab99910f5424c8e38e3ebdf92a0e2cd3dcc225299f1f4dc53ff4110044152",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\013_clip_0e3851224f7f78427ce20532\\overview_02.jpg": "7f9652a7c49014250734b6ecffd55db64515589ef4943a1961fedca4acd197ed",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\013_clip_0e3851224f7f78427ce20532\\native_keyframes.jpg": "eade669591710ba1d7678840ab011d6218927dfa65ea9c663953bbd608217506",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_0e3851224f7f78427ce20532\\annotation.original.json": "f80200186a376a75f3f25e6ec51b2855c6ddc16e531af54afb7b7f9d608b83ea",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0e3851224f7f78427ce20532.v001.json",
+      "previous_source_receipt_sha256": "96e25133a472ff6a4d722059a154013ad27e091b34941c55abde2c7e0c5ddd04",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "蓝裤者两次将唯一黑包抛起并落地，人物与包由复合叙述唯一指认，未额外归罪前景人。具体时间另记。",
+          "files": {
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/DECISION_PROMPT.json": "5364e994e5a0f6f8fba258052d9c08c56e6c6380d7150a0be374a313487a6720",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/DECISION_SCHEMA.json": "c864609b2599f9d53361cc81c642e2e166e071bb86e0c99a477b868e1bba9540",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/PREDICTION.json": "32f900f670d9d87c6f6369d83c3f085ad1e0aa33b4edc3c9f3525f8ffc89d283",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/TERMINAL.json": "4836189e6abcb842caeb73b24891f74637e124babdaa1815c706d040461f66c1",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/decision/GENERATED_TOKENS.jsonl": "7023d0476dfd456c6d6164d5defb7e8d27416093cf7361a7596050c5d557dff5",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/decision/GENERATION_START.json": "64b967d1c557a6fb523076bd04e6958d0defa71761b32ea8cdde616b4c7bac91",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/decision/INPUT.json": "7f958846ff35d8f1b84727b04a73e249f7ccaaeab1b758b6277b80e80c0bfbe8",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/decision/RAW.txt": "f1131227e652a162ad3118c8e971a328fbf82ee52de05fd106f7dcd6225ab796",
+            "research_results/clip_0e3851224f7f78427ce20532/full_native/decision/RESPONSE.json": "ce4d53bd3bfa7ba2b997ff00b5d1801df115976ccb16bdd18594c38e1b81de17"
+          }
+        },
+        "global90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "蓝裤黑夹克者及空中翻转的黑包均明确为异常关系，未混入旁人；仅写一次、上下方向不准确，按同一主体覆盖规则另记。",
+          "files": {
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision_PLAN.npz": "9dd85a3b5035fede579f71d534d10d633f4023871e4ac1fe7c9f44aeeffc7157",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/DECISION_PROMPT.json": "4bbc38eedd396b689e2e48b5056bab34db9d46d0081ed992266acb5a5b551690",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/DECISION_SCHEMA.json": "c864609b2599f9d53361cc81c642e2e166e071bb86e0c99a477b868e1bba9540",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/PREDICTION.json": "7d88e29af64f866ce2039261d3d5b51dd1550f16efbff38e2452a4e62887db82",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/TERMINAL.json": "7ac447b07d1c399cb1c467f8904d690ea4e0c75eec9020c7016d1266e01986a5",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision/GENERATED_TOKENS.jsonl": "fbe066d9537900889d61d8b2cd594f112a4d3c050fa0ecf312728a713f2feb05",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision/GENERATION_START.json": "d5944551360231494ed6e30427e8fd5df0519bdb63214cf57753af356711ba81",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision/INPUT.json": "006d124d0320a262d3890e5b6a7b9a6f4da07c068bb50cdc2f193fea9b2a001b",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision/RAW.txt": "ccba4a54339067d2ccfe1ae6ce9c0e3ae1295f27d181439dbe6ab858b7b0f85c",
+            "research_results/clip_0e3851224f7f78427ce20532/global90/decision/RESPONSE.json": "33559e0d1343d1a901b740dc9de089760e35b4a112020ab283cf21c50d668320"
+          }
+        },
+        "dual90": {
+          "any_binding": true,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "正确识别蓝裤抛包者及抛掷动作，但将独立列出的被抛黑包明确标为abnormal=false，未完整覆盖异常状态主体。",
+          "files": {
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision_PLAN.npz": "752c4b0d45038f7c8e804e233559fafa2a3ebfb2ff4074c08852ece66453e187",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/DECISION_PROMPT.json": "996f25cacd2f8296849d5e5dc3b22ebf6c5f1702c306ae05124275b7c9f10bff",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/DECISION_SCHEMA.json": "c864609b2599f9d53361cc81c642e2e166e071bb86e0c99a477b868e1bba9540",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/PREDICTION.json": "792c4bfff493337bfe97aed134585f4da673e1c1d8237f60c16cccb012e9fe58",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/TERMINAL.json": "95a2271baf4bfa4dac568177baee22f63508e4ec78d3ae40041a84eb3d179783",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision/GENERATED_TOKENS.jsonl": "8445e6f420ccf4a21835c7293edcb9ec1dfe2ef4d5903e5d08537807e249eb54",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision/GENERATION_START.json": "6f7ef5e44c4468205c7be7b24bc01a4a2709bcf283306a47229d07947fc83132",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision/INPUT.json": "d8d993c9a90b5197d4d4393b365b6b3778ad0ab938a52dacdff16e5e4c3bb481",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision/RAW.txt": "e3af34cdbc28a62d797c80a301f498618fa8cf2304bc3e44bdb03e2ccd0d0d05",
+            "research_results/clip_0e3851224f7f78427ce20532/dual90/decision/RESPONSE.json": "6945ccb96f725657c95918137ecdc2b6ad43b84c339bd6dac41d3c48c8eb2b84"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": true,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": false,
+          "false_binding": true,
+          "reason": "两次抛包均识别并指对人和包；另两次将稳定弯腰拾包作G04失稳，属于额外正向错绑且类别集合错误。",
+          "files": {
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision_PLAN.npz": "bf79986d72f411ca99d6c95c1ee9593139a26fe250af0d084bebbc8490f02f61",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/DECISION_PROMPT.json": "bd5c7f3b63f2ee8f1e95f331dcea4e3620bea329660498ec72dafc945b6fce18",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/DECISION_SCHEMA.json": "c864609b2599f9d53361cc81c642e2e166e071bb86e0c99a477b868e1bba9540",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/PREDICTION.json": "92ab8e1cb6ae0ef452f5fabe3ca1e8c95016fb2bbe1ddae943b3ade800e127b4",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/TERMINAL.json": "c20495e06b9f008b3ef7aaf6287dcec89c99f6bc650fb56910990c411c4ef87f",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision/GENERATED_TOKENS.jsonl": "d8789789206230516ebaddd1eb2854df865f17e2879915bf10b65c2f7f4dcb22",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision/GENERATION_START.json": "a4de0de19421bc33ce44bb884d59b566190af18a3efd5727a70f8b228a247fe2",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision/INPUT.json": "e41f877dff7fa2ec4e9233ea627415f5a3c6c40a8c554e0e86c8c217970bb7c6",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision/RAW.txt": "b37553df17ba18d86dcb133265cc22d7dbee66d1016d3de69e9a1b98060b2cb5",
+            "research_results/clip_0e3851224f7f78427ce20532/dual_residual90/decision/RESPONSE.json": "dd52c7a5305ca6e1155e3c2a20d5bd3aa91000e491e15cc7b42008ef96efa160"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_1aef1799d16104c8509f7383",
+      "source_observation": "Navy/yellow-letter T-shirt, dark shorts and sandals: the unique person loads the railing with hands, raises the body and brings legs over it. Nearby people remain independent. Full-window source views are reused; the native keyframes were viewed again in this turn.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\025_clip_1aef1799d16104c8509f7383\\overview_01.jpg": "add253aaa14354bfda0b25c532ac1b8a788fbe5936ed838e85e9d0d33d642fea",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\025_clip_1aef1799d16104c8509f7383\\native_keyframes.jpg": "2a2f5ec29cf89a2210ef41d12114c63a9b91dad50d53ae8509ae73c9ccd992e0",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_1aef1799d16104c8509f7383\\annotation.original.json": "27c5401399f73f5b4c79468fe9fe7e287a47c0269908992cbf83e72e95ab586a",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_1aef1799d16104c8509f7383.v001.json",
+      "previous_source_receipt_sha256": "63d79535338c60ae204c55e74f1bbad38fa51130e47a6593a4aa4be61ab1e458",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "黑底黄字上衣者和金属栏杆跨越可唯一对应，跳下措辞及具体时窗另记。",
+          "files": {
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/DECISION_PROMPT.json": "e5d9fe38c85a78bcd5f28d0887e82d43ccb6e085f13b16ec1a35991b782edadb",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/PREDICTION.json": "68319cddd11b14716f1a2351043adf04502b787e42c3d0ff3557494927876363",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/TERMINAL.json": "f696d262bee0b7f8c080ca59bebefcf38c9130c65c9f023e0040f74628348799",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/decision/GENERATED_TOKENS.jsonl": "e9fda638520e1973a9bf9d74b4dcc1110edb5d3e0f0cb497b3c88a1db50d1eee",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/decision/GENERATION_START.json": "0ea25779d2401db11a2d908dc692d469e299722add10d2845c9675b993c99944",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/decision/INPUT.json": "8618af15c58da55f305455eeda4984b4ec8ef4257678c6cb01485656d3617abe",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/decision/RAW.txt": "380756ca99de79a1cfa1de497fd0e21273b3d1745b6dac5789b0ffb68ed67e76",
+            "research_results/clip_1aef1799d16104c8509f7383/full_native/decision/RESPONSE.json": "cefa0652bfc41c3e60cfa4077e600dad34bb22a5e41fe9f3aa07b5341b80fc4a"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "events为空，漏掉实际越栏者。",
+          "files": {
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision_PLAN.npz": "b343c6fc203052fd8a68f7bc490ce31cdac772043b9d22fcfdbfc9fcfd6a3be8",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/DECISION_PROMPT.json": "fda9f9be380c377c7831d3831fc9e6fe5db744226ec36688c82405bdf199a0a5",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/PREDICTION.json": "457a1014688e72eb576cfd7ecf02342f5c28feaf90ec42bfa77f9dcbee922996",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/TERMINAL.json": "90cab97e0e155d678da995bb0362e8cc748ddc10a34d10bfc1de95742108119d",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision/GENERATED_TOKENS.jsonl": "6581ec93d17911cecaa9ca0063145dc65728e2b5d7374408f0d74fee32dfbaa3",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision/GENERATION_START.json": "ff063e8d1b0136ecdc644f3970a0782c1e893edcef04f6a42625b525f31f2502",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision/INPUT.json": "af41850772f3884888317465378eaaeacf142e87513051f91f418e44207bb3a9",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision/RAW.txt": "d59239b7927f8ef93d55035b7556bb606ed6a12793af6fb0a7104588a2003d5d",
+            "research_results/clip_1aef1799d16104c8509f7383/global90/decision/RESPONSE.json": "2af803554521ec999b5f5d4494bdf1eb4883e57285fd3fb3695284bc3619cd84"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "把浅绿衣路人普通行走标为危险占道，漏掉黑底黄字上衣越栏者；G06集合独立匹配。",
+          "files": {
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision_PLAN.npz": "b7a6f1f7f71a23aef2cda06774c188294a80b4ee66c4beda1bb025817edca9ab",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/DECISION_PROMPT.json": "f1b2c7c32a43dca6e4c0bf6e8444db703887343e7e1ef470f4e7f84b70c809bf",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/PREDICTION.json": "d2f1fe20249282c3bb76c4d81fd2eb19aebde26f3541a7d902d100a766d42863",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/TERMINAL.json": "dfe35a60ba15423893650a73fbede06713dddfb704f573aaea929be4ea6798b5",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision/GENERATED_TOKENS.jsonl": "aaa556167607ced3ae8caa97518a0f8c720fd8bb68c42362f22db48a41ede015",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision/GENERATION_START.json": "e865a59ca17c1fb6cc4c3f356758f3854b9e44c299935b473762a570ba7ade0b",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision/INPUT.json": "fd0460643aa27c1dfda390ec3cd469ad51f09774a3a33cbd0071b7caa0345076",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision/RAW.txt": "a9d90a4a0827e7c580064cd610d39de42f96cfe2e974af3bca4a2296f229d04e",
+            "research_results/clip_1aef1799d16104c8509f7383/dual90/decision/RESPONSE.json": "02d2f57c7b02042cba1d36a09c05accb4ebe1fb3219f91dddbe01f4b16b24563"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "以浅绿衣卡其短裤路人处在路上判为区域占用；特定异常行为与对象均不符，G06独立匹配。",
+          "files": {
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision_PLAN.npz": "dc8bbe1fe2cfdde6f6f4ed0608c210165099a8b365f62a3422fa5f5005abd227",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/DECISION_PROMPT.json": "2ab9c89f6a3be94aa5374bc745d42fbfa170d3b6db9a10cfc05d25e432a577e1",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/PREDICTION.json": "0c4c6c6517a08d410b89adf0d50ac79bd47c85355dc14a4f7ef9aa49f7a0b64f",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/TERMINAL.json": "fa6efae90e7e5c1bbd17f2650098ba8001647995b92ba4275e039d5b25742b0b",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision/GENERATED_TOKENS.jsonl": "28febae02a44116be0f7abc3ee28374e111d1234409b7a5fa410465ac9d08397",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision/GENERATION_START.json": "58bbdbac323ec0dd1fc19295a8039a00a209bc07dcc60450dd9fc69726ba8ccc",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision/INPUT.json": "225e88217c79275a0fb66b341d089c188167b41d02a2fcaf6a66061569319f5c",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision/RAW.txt": "47d3f728a0dc3c9e0a77b54d1388eaeb04c386cdeca6b19e7c98a47a06d91b88",
+            "research_results/clip_1aef1799d16104c8509f7383/dual_residual90/decision/RESPONSE.json": "5a4049bb5ffed67767cdab5977bd2234b660e0380f24af8154b8a5aa71be3310"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_2d64ce7d1a7792c55f362679",
+      "source_observation": "Near rider in gray-white T-shirt and dark shorts rides a pale-blue front-basket bicycle while holding the blue umbrella. The central dark-hoodie/white-pants person has a foot down and uses a phone while stationary. Other distant riders are independent.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\043_clip_2d64ce7d1a7792c55f362679\\overview_01.jpg": "d797c12365014a6ec70583f49fb8792702ed78bd6e64b7b73ac2c34e69809c75",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\043_clip_2d64ce7d1a7792c55f362679\\overview_02.jpg": "06330c4d7f82778baab783c9800a89c3b3bd21a31f5bf07dcc921ca9f1beda48",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\043_clip_2d64ce7d1a7792c55f362679\\overview_03.jpg": "01a5f6d236ebceeb80cde7c411c156f95a44b90f663fa00b155430291458ca7b",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\043_clip_2d64ce7d1a7792c55f362679\\native_keyframes.jpg": "f316609095126aa94dfcb24ef6da7df947f8f56aa9153dbd630df0fa6a404584",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_2d64ce7d1a7792c55f362679\\annotation.original.json": "d57b3670dd39481701b57dd8410fc387e1e165805cef9430cb981a939d273702",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_2d64ce7d1a7792c55f362679.v001.json",
+      "previous_source_receipt_sha256": "036a957f60f7068f1a2da80884f601daa69fb1b30bb7ed3b9c52762a76ea40be",
+      "verdicts": {
+        "full_native": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "把黑衣白裤已撑脚停下的手机使用者当作全程骑行用手机；漏真实持蓝伞的移动骑手。",
+          "files": {
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/DECISION_PROMPT.json": "4cdf8bd7d75ee9e5a3acbd4ba9b6a5a6283a9d1a9d6be9bca983716e004f5d23",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/PREDICTION.json": "464c21ade026820e560ce8972d6bfb5a56a8d7c2cf2e4b72b557bf41810567b8",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/TERMINAL.json": "cfcfee5376ce389674f5bad9494a9db3a328e59f438256066224a8b30c198cbf",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/decision/GENERATED_TOKENS.jsonl": "12373dc6256fdebe3b57fdc823c694620e50b002dc5bc751ea24eeba21c7f389",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/decision/GENERATION_START.json": "479fd1f455294ce5fdc3a9f8e3395241c497a85e97d517d78bfebc611a026491",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/decision/INPUT.json": "4ae293b8ab269fa0c247d8556672f63f8010b4cf4208e3bc36aeb11b1febe1c5",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/decision/RAW.txt": "6fceeb0548f42dc7375724e0341718dfbd28c3e6f091257987dd6d047fdd3aff",
+            "research_results/clip_2d64ce7d1a7792c55f362679/full_native/decision/RESPONSE.json": "46220e9b0d437725c4df8b780bb15490a5ad75527f36dd31ed9c7fc44018697a"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "F079身份及黑衣白裤配手机的描述指向停脚者，虚构行驶中看手机，漏持伞者。",
+          "files": {
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision_PLAN.npz": "c923e8f940829491f0d00a30c9ff8ddb1ffd22afd2d3a6addf22be2ee4abbec1",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/DECISION_PROMPT.json": "f193bcae1ade121041640c26de13c98a58e6621fd46c8549de536f258c51f9ee",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/PREDICTION.json": "efdf3d0a835c28c1f8cc702157aa3b433480b71b72510472c9627a19ef6495c4",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/TERMINAL.json": "f9d1caa0f3ab712103d0b35740036bb99e7930d826476f648e55ddcc08955191",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision/GENERATED_TOKENS.jsonl": "6a6f4ca95ab82b09738ce4d57ee4bdb7971b1a36f4935db3a919c08cd115a094",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision/GENERATION_START.json": "b561e32581c86288aaa05a90208c208b96fdf8836536ec7f825d21516b9c26a0",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision/INPUT.json": "c1258a81bdf3c115a9313170a70e0b2341edcca29e1912a03263ce2eaa7da277",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision/RAW.txt": "55b5d36cf45ba49c6bc9fafc66687711181e0f7fa324606a31eec504e3e442d4",
+            "research_results/clip_2d64ce7d1a7792c55f362679/global90/decision/RESPONSE.json": "15880de3f5eab3dc4ffd69c1a7698dac9ade7cf467aa5efcc0f316fd28e552b1"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "把黑衣白裤者低头看手机误判成行进中手机使用；蓝伞浅衣骑手未报。",
+          "files": {
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision_PLAN.npz": "44796bf9d85f0078e9307514ffa543eecee886f11f9831cb082833de82a908c4",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/DECISION_PROMPT.json": "fe23a5b2fc31cfca4efbe80a7287255f698002deaa7af4edd5eb90767d4344b4",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/PREDICTION.json": "77d54f878e2f060ff4a0a478aaef7bfb04ad0e36baa5e5f9fb2df3862b994e79",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/TERMINAL.json": "2953ece80fdae5ffe03c2225298e3bacfcf7629458b7d61bc8f1d917a9780ec5",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision/GENERATED_TOKENS.jsonl": "803d450ef619129cf4a088cb7aafab040844103f1d9f65a854870c23cc688aee",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision/GENERATION_START.json": "a4086f02a44ad777e31e8134af813ee71037145a13d31f2d2487f9ec45f2ea26",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision/INPUT.json": "0af6d8135bf3f99038172a7f5d6e619d9666f7375d13c4b18ea8291c3dcffa5d",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision/RAW.txt": "684737a1c54aeb64ec66768d11d1046fcf51b308a5ecf873cbde7728bb9a0c69",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual90/decision/RESPONSE.json": "06aa7474310a02c171e31c900310cf31656bfa51611ad874e66b1836da4cc24d"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "与dual90同一错绑，kind差异不改变结果；三种压缩输出的G05集合均匹配。",
+          "files": {
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision_PLAN.npz": "b05ef7d1b2518e34d1128abf62e0fc9a66b9b9b8887509012b7129b85e29ea41",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/DECISION_PROMPT.json": "2f2c9bf6839806f0b3465d662c2d2aac36c31eeaf9eee328a0b3ce0585c5cf8e",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/PREDICTION.json": "e0d1d13386f6f7440fe599b1cda84cc540a7f2903e7738e76c0105fbeab7a2e8",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/TERMINAL.json": "1c4de07aaa63406c16178e7e0d7ab94a4e2292ae1f2110ea11da70c12f524169",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision/GENERATED_TOKENS.jsonl": "bc40b6971d35f8331f9721682f218283eb95c247a6bc11afbfa43b27987fc08d",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision/GENERATION_START.json": "03c4371d92c8427716e28601e0822dbe78a0da72c171a3728ff24db996dc87f9",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision/INPUT.json": "0e25aa8bb919c8dfaf1e1fc10743d49f1ad773c64295060ce8135a98df894da7",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision/RAW.txt": "c3c136cf26f7e085cb3389af1a0f7be1cb9d8e0573ab0454fb3e6e84e817571b",
+            "research_results/clip_2d64ce7d1a7792c55f362679/dual_residual90/decision/RESPONSE.json": "7a3d9a21518c04a5fb13f613a5abc70fabb8914db4003e0b9961658bb3378076"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_43f409d01d48ae2cecd52247",
+      "source_observation": "One pink-shirt cyclist travels on the plaza behind benches/greenery. The white-shirt/light-trousers and dark-clothed foreground people walk and are not riders. The real riding event and frozen G06 policy can be recognized independently of actor correctness.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\067_clip_43f409d01d48ae2cecd52247\\overview_01.jpg": "ae78b80dc3c15b1434b0a561fa29199698e11a16c4cc7e4eb3938133d51b84ae",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\067_clip_43f409d01d48ae2cecd52247\\overview_02.jpg": "cf5f8711ff1d2b756605b8d2bd46ebe69bdc25a87589b9338b9966556dfcb1bc",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\067_clip_43f409d01d48ae2cecd52247\\native_keyframes.jpg": "d3b1df0e641bfbe9b520ee30d88678d908bd65da2fca85cb15cb78a9fb571171",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_43f409d01d48ae2cecd52247\\annotation.original.json": "3de2b55fca48118c52ec63e9e53b25b92cfc14903e47841e07fac24335fdb053",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_43f409d01d48ae2cecd52247.v001.json",
+      "previous_source_receipt_sha256": "55da908f2f502a5fec0a6068bbfc479696c5f4a389de35a5fb98a151d68135ae",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "粉上衣骑手及广场禁骑规则正确且唯一。单帧起止、进入方向为次项。",
+          "files": {
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/DECISION_PROMPT.json": "c6e73468a0ff3b891296ac1c1e59983abe9d4175966c97a37d6208945b814de2",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/DECISION_SCHEMA.json": "b9a5834dce39f8a295d9952324c1a572008b6f42340963e6a62b6dedcf2b110e",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/PREDICTION.json": "52167502813c03f3e67a0c17c7c0663f12ef9392e90613d6fd306a15552b2e45",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/TERMINAL.json": "b847ddf97f68efd47ada4ef459aa02618e35a05edc4d95744a1198c94e7852b1",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/decision/GENERATED_TOKENS.jsonl": "589210378cd5ddb66314d92c40071ccaae756663e4dcf2c44695324ba7f44a53",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/decision/GENERATION_START.json": "de629023513755292b962701c94a477187a5981625dbef36fb453d591db907a3",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/decision/INPUT.json": "3d5f3e3acb9c72d0dbaaca5e4fa77c28a8943f803ab0fd50ebba641481ce28da",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/decision/RAW.txt": "c2e40669308bcdf3fec526eac0ad7f2966a3308c2750af3bc0da54f85900db69",
+            "research_results/clip_43f409d01d48ae2cecd52247/full_native/decision/RESPONSE.json": "41eb68a62f5482247f648a70e7fa086a5f3cacc644b42870629d057d74639c97"
+          }
+        },
+        "global90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "粉衣骑手在主铺装区骑行，前景步行者未被正向归罪。",
+          "files": {
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision_PLAN.npz": "d3503ab6209f4eade790cdfe5c1593dbe11796a835bc24b2c7a7258784d75662",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/DECISION_PROMPT.json": "29fa35e6629cff13438bcd9cd95defcc4d40692cea7bd66df85000a8150e0c31",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/DECISION_SCHEMA.json": "b9a5834dce39f8a295d9952324c1a572008b6f42340963e6a62b6dedcf2b110e",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/PREDICTION.json": "b7b189e4921cce1a4eaa203183114d104ea4fc923ea249b58d015ec22c6d3c21",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/TERMINAL.json": "aa286e3abfaed947394ef529e4e85e438846e84926728a072863309f7f04e68b",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision/GENERATED_TOKENS.jsonl": "23e89b0fe07e56a4a0f6400388aa4e0e8c28150a75caf74b812d3ea8823aac01",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision/GENERATION_START.json": "175abde5ca6c9425c1347d359ab33a94cf125680cd76831cdc80c565e2d49f28",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision/INPUT.json": "3d7d8d630fdf210e0db6ef40b75ebe1823d5910f58bffb8517e5b3689f59f332",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision/RAW.txt": "f56bf19c14bece5b5919746de0caadd7ecff3f305070dfb41ad54f6d8b48b2d7",
+            "research_results/clip_43f409d01d48ae2cecd52247/global90/decision/RESPONSE.json": "a0143121365790ee7c4f52ad6f81265ff2c905ee0bf4ed025e637ebb444d3b22"
+          }
+        },
+        "dual90": {
+          "any_binding": true,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "第二事件粉衣骑手正确；第一事件将前景白衣米裤步行者误报为骑手。",
+          "files": {
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision_PLAN.npz": "62e8feb72a3d0bfd02d3953359b188c8dff0d5e7bc11e3ff2e6ff5bb35652e71",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/DECISION_PROMPT.json": "5bf68a8a198acddfb637f31fc30b0795ce376794524e889713558f3d35becc91",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/DECISION_SCHEMA.json": "b9a5834dce39f8a295d9952324c1a572008b6f42340963e6a62b6dedcf2b110e",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/PREDICTION.json": "9e3f5c73c58a480c0b767efcd1f1e8703c7adddad7ce13406906ff45dbc53c5b",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/TERMINAL.json": "68227b06e7026080bbaa541d3c1d706a5d925140f4c78cf5f9af3da523fed793",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision/GENERATED_TOKENS.jsonl": "3b89c2f7429292979f628ac205e3a53334ad456a4e931b4d62459ea0e9117f84",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision/GENERATION_START.json": "73ca5277946ef16ff785340071321be40f26a8060b0cf3c2c44b094b250e45b0",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision/INPUT.json": "2e547fc306cedc8c9930b8a4beadb2a209375d00c8b7d17747996a7854bd8d35",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision/RAW.txt": "4ad323feffbbb87ee98c0fbbe129e5b7df67b9cd604436c9e27b28bef1cc8af7",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual90/decision/RESPONSE.json": "0f1aa1ed754c19cf4321b3e646e6cba9a1c2a0f1672fbca7d53bc97f4aaf2312"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "粉衣骑手和禁骑位置正确，未把白衣步行者列入。单帧及行进方向另记。",
+          "files": {
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision_PLAN.npz": "d0c06a715e04f6cd3a61bf6a26dd5e5155358dbe7d72a29bd5882f2138afaceb",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/DECISION_PROMPT.json": "2b761771a376b62bf78a6632e034e58959b03c79ab910c719f808bef175f112a",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/DECISION_SCHEMA.json": "b9a5834dce39f8a295d9952324c1a572008b6f42340963e6a62b6dedcf2b110e",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/PREDICTION.json": "266b2b53bcf1edbf7c7b8ea56c667d5553e9a71bb9eee83b854c2dac3f7e01c2",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/TERMINAL.json": "9e02d41d5d3751e6434362b766e1cec775e562f897aa4c3f499b3208bd08c9ee",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision/GENERATED_TOKENS.jsonl": "cb29bbb5c2d25e90e102b36ff93f196bd01e3a02ab5698a20350da2bb9f8f11c",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision/GENERATION_START.json": "446f363ca3af6bb30a0fe7c23227a538a70847249f0791b4dfd91ebf572ea410",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision/INPUT.json": "b5686bffe70c5bdeea16caf9aeacc84e2912dfed8ce70ff573f0f4de1c087432",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision/RAW.txt": "4d63e238fcd4c839869b488b5d1527dcdaa244d4f45ee2b3ed05c918a7732920",
+            "research_results/clip_43f409d01d48ae2cecd52247/dual_residual90/decision/RESPONSE.json": "8e8ac4a4360e61918699f1f5279d4fe77399a65ed5a1a2326099ff7eaff8998c"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_5795bf152bce19c12b76179a",
+      "source_observation": "Black smoke visibly expands/rolls behind the left side of the pitched roof. The smoke is an abnormal state subject; the video does not establish a particular building or person as burning/causal.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\079_clip_5795bf152bce19c12b76179a\\overview_01.jpg": "92a2f5ac2b6e25386f28b120f2cdd34c9f3f4d197c8dfc89fbbfa00cd3a7aee6",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\079_clip_5795bf152bce19c12b76179a\\overview_02.jpg": "d724a3ac15ae31cdae6a68baa69d0707adc0daa7bbded67bc4d2f5d4f86c70bc",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\079_clip_5795bf152bce19c12b76179a\\native_keyframes.jpg": "af5823c382eca6f9ff0ce4bba572caf04d9b53217be3f1eb3d874becf64e453a",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_5795bf152bce19c12b76179a\\annotation.original.json": "6548caa1e185b4e8070c89a1642b8d64f85d143cb5302e75a30f107f388a21e4",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_5795bf152bce19c12b76179a.v001.json",
+      "previous_source_receipt_sha256": "6fc97fd6d8241cc60dcd039eda8f625b55b24978ad27bb75424681ab0a76d0d8",
+      "verdicts": {
+        "full_native": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "scene提及后期黑烟，但明确否定异常且events为空，漏屋顶后扩张的黑烟。",
+          "files": {
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/DECISION_PROMPT.json": "da1ea7a49e3361b4449ee6aaf0ddcbea67185df1e2081dd10c42f35bb6790364",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/DECISION_SCHEMA.json": "32324a53b565639f864d490b91a2eba9e6580c4d0d26cffe0afc2013ea5af930",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/PREDICTION.json": "3b660e4376badfa64ebe5de05e782399085b94ca01aca8fab6696c66f9c327c1",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/TERMINAL.json": "333dd7ec46d55150a7233da8614720135a46a3cb1d18d8ecc1e2b5d481df6998",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/decision/GENERATED_TOKENS.jsonl": "8b9b7578abc4036144bccbc3ec656c7c9b29349d4441e1ee285f972ed819abaf",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/decision/GENERATION_START.json": "da8eeaa17147b40e9e6c1d0a178f552fb14b7bdb0f130e10420bbfa3341553cf",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/decision/INPUT.json": "ea86f74151323c6c2701b5b33e7e9745ea1c3a6b1397e438d709287d48f9882d",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/decision/RAW.txt": "5152f3bb8d321c4f575dfc6e1d4eb601db43224ca0ba955e2ee4f5fcfc31ac0a",
+            "research_results/clip_5795bf152bce19c12b76179a/full_native/decision/RESPONSE.json": "a53dab9349ef8b13002981fe5b7f43c2fbaf4a5b3aca1b919bc57190fb494b1e"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "将烟变化解释为云层/正常静态，未肯定异常。",
+          "files": {
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision_PLAN.npz": "8b840c64f4ba893f6643ffb2cd62fa21ae49d3922ea4e1920829c5111f96a532",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/DECISION_PROMPT.json": "b237bea26f09ce400a4ac1810951a3dce0ae600936634c0ebb71d12afdc280d1",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/DECISION_SCHEMA.json": "32324a53b565639f864d490b91a2eba9e6580c4d0d26cffe0afc2013ea5af930",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/PREDICTION.json": "3bd5d3567c713b8ba6744d7aa6f4ede4ef52650313c2e27778d30360fda259f8",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/TERMINAL.json": "6ca1c91c8bb552bc0493bda909f93dfa537e2aa7bc453509ba9406e7e04eed98",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision/GENERATED_TOKENS.jsonl": "9ca0f9c18339705af48e8a27ddf23273c1a69ed184d00f145e09144b2fce03a4",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision/GENERATION_START.json": "78c2fc523b513c7e062c7c12b2f3854339ccea33c14dd5783acd030a99a72706",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision/INPUT.json": "4e35ee67a2a1bb9645547026d80f291962947799994d186520d651cb2a7ac83e",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision/RAW.txt": "55bfbfc800337b717e008c536a1e52293c2ef54c937a60097cb9bcbd82c6e903",
+            "research_results/clip_5795bf152bce19c12b76179a/global90/decision/RESPONSE.json": "aedc2ef8b8efba3563bf6b96457c66d099a437d4292963623e7be92d3c3a2871"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "称静态且无异常，未检出黑烟。",
+          "files": {
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision_PLAN.npz": "9fb7eaaf11b7445d814dadb1593a205eacce65ff13a403519e4a4f61e5e957ef",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/DECISION_PROMPT.json": "b4ec26b16ecaca5d0aed83b96abf696de8e3744f9b8c2dfb0deb6f34ae32cb2a",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/DECISION_SCHEMA.json": "32324a53b565639f864d490b91a2eba9e6580c4d0d26cffe0afc2013ea5af930",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/PREDICTION.json": "92678aac89d43abd41e1d464bc2ecde0cd11381c6be874f1ce4673f3dcc66484",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/TERMINAL.json": "e9e88d4ee7c86b3472f7028ead140de5b4990d7b5b2c2a0d0d62ec88abc39510",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision/GENERATED_TOKENS.jsonl": "f0a155e86f9fbbb69e2de7b1432dd5b9c98024ccc6e516a7d1af15af6352443d",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision/GENERATION_START.json": "abd2505fcdc28362583f158efc617238b8c9453a813ece43bfc339e33c797d34",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision/INPUT.json": "86b8e479b8dc7504dce78983ba9c10a3861041ec07ab19948e8c5a98b6fa8c05",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision/RAW.txt": "68ff0dba8c6cfa5ec6532d8a7514d02799422f789795e5d4512f1bc85ab5d9e9",
+            "research_results/clip_5795bf152bce19c12b76179a/dual90/decision/RESPONSE.json": "340ea0f2d286d49f297a388670fa74f506dae2718e9414b613cba1ff5b373b0d"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "称静态且无异常，未检出黑烟。",
+          "files": {
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision_PLAN.npz": "4a8d79f48edc89601887440bdcfa5ccac8a20d09bcd10c7f6c97724745eb59ec",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/DECISION_PROMPT.json": "bdb3326c3fac6de4673f0dfbb006f575f2ece40cc759a188a96c780b4465a390",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/DECISION_SCHEMA.json": "32324a53b565639f864d490b91a2eba9e6580c4d0d26cffe0afc2013ea5af930",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/PREDICTION.json": "9d005450c0f8f50ad5d8c308d2b3e7715760cb20f07477741fa2821f8f3ec6c1",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/TERMINAL.json": "68ec81c8da358ec340ef1bbf60a045369842762cd469fa618ef3400cd8d1711c",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision/GENERATED_TOKENS.jsonl": "d9e82f7ad7da61ea615adf34d8bdcdb6a9fbe6ff339a2fab52ce47271218267c",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision/GENERATION_START.json": "33293621e840ed8d099e0549885bea319133aeea9580bf1cf665b78e5bdc8906",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision/INPUT.json": "80f8b89c9948ed0dbbc5a48c81fa75de5277465d4c7249651fd03d9ca9d511bc",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision/RAW.txt": "eb236feec7b77f90561c290641a0453d87a9ba20b7d2580fff3800bae6d9df4b",
+            "research_results/clip_5795bf152bce19c12b76179a/dual_residual90/decision/RESPONSE.json": "35be08347345f4092c756ae604cd0bc4b6604ff72fe7cdc1f6e4f357beeba89b"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_60592c2ac43b32947b17f7c2",
+      "source_observation": "A single gray-top/dark-trouser rider drives a small two-wheeler with a light front panel across the main plaza, visible early and again after canopy occlusion. The foreground walker and static blue-covered vehicle are independent. No hidden trajectory is filled in.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\087_clip_60592c2ac43b32947b17f7c2\\overview_01.jpg": "d5d0c9281d4a2a707383677ca4cfdb5bcbf172b96c9e6f545949a769c51080a8",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\087_clip_60592c2ac43b32947b17f7c2\\overview_02.jpg": "7e6862a631a2d41236cf636cdd9aa0479215b91a651af363601ce49fbafe86c9",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\087_clip_60592c2ac43b32947b17f7c2\\native_keyframes.jpg": "2d5435dd9cdd73b6523b1059b0d341a2e1acbc3cfc56ecef88b8211758ad05b4",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_60592c2ac43b32947b17f7c2\\annotation.original.json": "e54a9922d90dcb7b25657d0642f7dcf9c50fb2928e7051c74bbd3cbd31e2c1bb",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_60592c2ac43b32947b17f7c2.v001.json",
+      "previous_source_receipt_sha256": "b60bfb2a5ee056b0a7219e3ac2d83d861b24625922d11339e7478a0e1d4b6a7c",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "唯一移动两轮车及骑手经过主广场，按禁骑规则成立。动力类型未核实。",
+          "files": {
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/DECISION_PROMPT.json": "1290843ada39a012005316166d329b871050a7e6aeb3de6a5bdee06bc89e43a9",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/DECISION_SCHEMA.json": "251cb1f6b5bfdc4ae469ccd53fe65d21cfe0f5cba6000b03c4cfa5d0e592d813",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/PREDICTION.json": "abb124488328ec7a2872f75bc0d9072b7eedfbf8cb4ed853ff3dd0faadc786fe",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/TERMINAL.json": "e33aa9aabde8b62d589f7e883d0cc34f9c5b09ed25bf74a6dbaddb34904e9e56",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/decision/GENERATED_TOKENS.jsonl": "f927137d85a6396a0005c76a7b4ab3b11c84903076a55639c70d6c6b783e3b53",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/decision/GENERATION_START.json": "2c240fa058466a69c4114e4fc46863d171fff19e9f0bec18717a722860fb3cfa",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/decision/INPUT.json": "2f1aadd94c76d2ca7ee8209c4a0b2f13b65f389842d94a8433fba9c0520b7a99",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/decision/RAW.txt": "98b6053c617e84f6cbf911b2e61c17a159acb709574825778255420711f79bad",
+            "research_results/clip_60592c2ac43b32947b17f7c2/full_native/decision/RESPONSE.json": "e9e20590749dfd4baad83f307df22cf7fdef77977c57932c45c98165fabd20f3"
+          }
+        },
+        "global90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "两轮车的移动轨迹和骑手唯一；蓝挡风罩属性无支持，未单独归罪静态车。重复及遮挡期间持续骑行另记。",
+          "files": {
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision_PLAN.npz": "c83d4d7122d31e6564f37305509f798f16ffa85d82f3a4a37da38046cda10a62",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/DECISION_PROMPT.json": "02cf7c247941d19be1843e9e74f8374fcdea9ead24c28c2f7312a8c015c3a185",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/DECISION_SCHEMA.json": "251cb1f6b5bfdc4ae469ccd53fe65d21cfe0f5cba6000b03c4cfa5d0e592d813",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/PREDICTION.json": "4b87f32af862a10f583895a42ff8b3b3b62335d410c3bb679e990d60755ef4f8",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/TERMINAL.json": "8260542f2d8210306e581397e52c68922ea8298bf6d7b2a96c9770f26fb3cd88",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision/GENERATED_TOKENS.jsonl": "98c24c7b06dbd1cc39990d1f09aada612ed6c97f34b70c5975fee4bbc573cd15",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision/GENERATION_START.json": "1690e3e704c093d2c5a1de439c6e90cdeede3ac2befb961a16bc35996a13f59d",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision/INPUT.json": "f0ad06a26f35625da93bdc9c285988a63d67466fcdd9e7123683608ca1072b12",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision/RAW.txt": "80ce23c51ee32536a7eb2d7a790e5e63ddba2b310d92b0f939121caf8001f8f9",
+            "research_results/clip_60592c2ac43b32947b17f7c2/global90/decision/RESPONSE.json": "3c40851d23dc8ec1ba4cf36db4c642be608596e3d701a4d331ecdf22c04b3613"
+          }
+        },
+        "dual90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "唯一移动骑手和车辆的复合表述正确，蓝包没有图像依据，未新增异常主体。",
+          "files": {
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision_PLAN.npz": "a7dfcf1ddaf55ef5a72a14bb0bb9b2b3e66fbad62018403b87a90198f2221329",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/DECISION_PROMPT.json": "ac60df573aadbb3fb9f3271d5d8040ae3070c618126e806d4af238653f1b5aee",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/DECISION_SCHEMA.json": "251cb1f6b5bfdc4ae469ccd53fe65d21cfe0f5cba6000b03c4cfa5d0e592d813",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/PREDICTION.json": "ad9392f8492005079aa071b8c2983123fc912db34d7b1120ab3463dd88b94452",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/TERMINAL.json": "b4c4637a0e9f8bf62c79828e728a964d432e6258618c6b374111d5a938a56e64",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision/GENERATED_TOKENS.jsonl": "c1b056d9903c2bcaaaac3f50b987b97a17717f05df7e6a7cf94d797cf493f1e4",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision/GENERATION_START.json": "e75f9fb5aa045b36e76a4016e30b68a50437942ee0cd80b268c441b3e80610a5",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision/INPUT.json": "fe92684525d2aae7f9dbd9b11de80dd72872341bbb5eaba1a2a8894d57541dda",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision/RAW.txt": "933c00629bdf21ae82131e40b2cf60e3fc151f67bd72b70ddc876bcafa33831e",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual90/decision/RESPONSE.json": "44f8cf8b5273a20325f93460dd08a049a38ea6869f07ae711efef1176b99d387"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "深色衣裤的踏板车骑手与铺装广场关系唯一，真实骑行可核。",
+          "files": {
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision_PLAN.npz": "9193f842f2233eae36c957f2a342681b4332669be9f7c88072a509ffa6850e2e",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/DECISION_PROMPT.json": "5cd8197e735320002e3633bf20723e12d75f24f2cce04220870fc8beaec5f2fc",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/DECISION_SCHEMA.json": "251cb1f6b5bfdc4ae469ccd53fe65d21cfe0f5cba6000b03c4cfa5d0e592d813",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/PREDICTION.json": "82d2c7b1b585c0815913b9c40a1723325f732e11205b1d68c4b1c87112ec0509",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/TERMINAL.json": "4cd3a4e5b0893f2b8670b81e49ecf7d898309b94e1550d9f48cb8e988ab8052c",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision/GENERATED_TOKENS.jsonl": "583dfbe465625c5899ed1fa7116846dd8668da0e02ac3a31acacf2cd1bc053c0",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision/GENERATION_START.json": "b2ab23fa86121bc803a4f85ed9b003048a0e6597d2c8c0fd88e82fde15791aa5",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision/INPUT.json": "1f9ec8568319c14c7a2921c17d30aa5eb8705df3aaaaba6af88ba3fd396dd2be",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision/RAW.txt": "378f0934ce9a9b6820a93de8e38894ad9658f07ac66dd6f2357027d17622f83a",
+            "research_results/clip_60592c2ac43b32947b17f7c2/dual_residual90/decision/RESPONSE.json": "cc290f517f1b5e43f4445e4e49855a173b5c7f207a8188516a54a4ae066161ad"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_67b65680d3f086877e394195",
+      "source_observation": "全35帧及原生锚点显示近护栏两名深上衣者相向推抵，分别卡其长裤和灰短裤，二者均施力；前景绿色背包者、右侧红衣浅裤者和白衣深短裤者未参与。",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\091_clip_67b65680d3f086877e394195\\overview_01.jpg": "68b9d55bd873260c447dd52c0b0482b0db1f634da3f8e475d387f51bbf9f0abe",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\091_clip_67b65680d3f086877e394195\\native_keyframes.jpg": "0b83ee8ba3589064702c4c5726aa35cbbc9d425e73e8eb19358f66b2840a5b65",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_67b65680d3f086877e394195\\annotation.original.json": "d543352c50db3d09d3b52e157709cce6a219442ded259ee06cd3d3205e7f3294",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_67b65680d3f086877e394195.v001.json",
+      "previous_source_receipt_sha256": "8c37448ae9326b0f72cc5c96d5c86b32fcdcd395788667a3f4d82fc46308e1d6",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": false,
+          "false_binding": true,
+          "reason": "深上衣灰短裤、卡其裤两施力者均正确；额外将红衣、白衣旁观者标异常，G06无对应异常。",
+          "files": {
+            "research_results/clip_67b65680d3f086877e394195/full_native/DECISION_PROMPT.json": "784a0a0f71c25870da7dfaebe9bcc59cc6c17ee140950ce2ad02a00286791ce7",
+            "research_results/clip_67b65680d3f086877e394195/full_native/DECISION_SCHEMA.json": "557d98896d2c951961d655fe8fa348cea47648486ad4315b2fe3120c83a6bfb6",
+            "research_results/clip_67b65680d3f086877e394195/full_native/PREDICTION.json": "165459f9d9d57f332598cbd85a75902e46e82ccbfb44055d44ee3eae6fd6d298",
+            "research_results/clip_67b65680d3f086877e394195/full_native/TERMINAL.json": "c9ba1b2253e24dd0a860062160c829c1bdc18b8ee7a7f95fe97cd7f7d30bfa1a",
+            "research_results/clip_67b65680d3f086877e394195/full_native/decision/GENERATED_TOKENS.jsonl": "eac8a24984145d2392a350fe75f41769e307b043c9f5fae51d1b0dc711f319e5",
+            "research_results/clip_67b65680d3f086877e394195/full_native/decision/GENERATION_START.json": "e58e86d4cc23350326407bf69a32a70fde233de856a68809f4c13bbd95d11061",
+            "research_results/clip_67b65680d3f086877e394195/full_native/decision/INPUT.json": "8bf763a46911a498462d232ed31a2768c9c7ee310e425b7adcfd30e86d53d94f",
+            "research_results/clip_67b65680d3f086877e394195/full_native/decision/RAW.txt": "0dc3b068caf2aed488f1c22643024d5c1ab8f964373308fc43156e92da4067a9",
+            "research_results/clip_67b65680d3f086877e394195/full_native/decision/RESPONSE.json": "ab6f14bbf2f47b67280ce1f77078f4bf1cc717bf8bd0b1d5c2eedd3ca0057e14"
+          }
+        },
+        "global90": {
+          "any_binding": true,
+          "all_binding": null,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": null,
+          "reason": "卡其裤者与对抗正确。第二人“浅色T恤、灰色短裤”混合线索：灰短裤与对抗位置匹配，衣色与近旁浅衣人干扰；完整覆盖/额外错绑留待定。",
+          "files": {
+            "research_results/clip_67b65680d3f086877e394195/global90/decision_PLAN.npz": "517e67750c50e2db24b86e0c66a3b64308877085a7cf888868aa5b9b6f0abd0f",
+            "research_results/clip_67b65680d3f086877e394195/global90/DECISION_PROMPT.json": "979d1b40fce30a2904b2d6f9845f92f513c0b5d37c1e105ebf025fb6af5eedcc",
+            "research_results/clip_67b65680d3f086877e394195/global90/DECISION_SCHEMA.json": "557d98896d2c951961d655fe8fa348cea47648486ad4315b2fe3120c83a6bfb6",
+            "research_results/clip_67b65680d3f086877e394195/global90/PREDICTION.json": "c454b6a15faebc0c1e1b61f38177223bb832c11a13477beeeee476017ad0a32f",
+            "research_results/clip_67b65680d3f086877e394195/global90/TERMINAL.json": "51ab7d781f12b4a4e13b2847839e7dd3877ba1a3c067a8cd952776a62d25f1ee",
+            "research_results/clip_67b65680d3f086877e394195/global90/decision/GENERATED_TOKENS.jsonl": "3eb5ef9f174990d88e2a0b215ff71848da7ab0ac34d26a142976a1bfcf3a1e81",
+            "research_results/clip_67b65680d3f086877e394195/global90/decision/GENERATION_START.json": "897f68ab19a5ec4dca1cf5ecb498fc1d36ac2e4ee44c67f4d3a0bfce15ac77f7",
+            "research_results/clip_67b65680d3f086877e394195/global90/decision/INPUT.json": "67846a47b214712cd38f36c08ccb07b10b540b9a54256a3aea14f14ffb80c33f",
+            "research_results/clip_67b65680d3f086877e394195/global90/decision/RAW.txt": "26eb82c91260d5de374e65f1e73b9607c511634545532a7c1ac3ead494406b08",
+            "research_results/clip_67b65680d3f086877e394195/global90/decision/RESPONSE.json": "8e143fad3e8c8466e0eac1836fbf11df4a3f1262c8a2a6f008960ab2751e51d9"
+          }
+        },
+        "dual90": {
+          "any_binding": true,
+          "all_binding": null,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": null,
+          "reason": "卡其裤施力者确定；浅色T恤和短裤描述不足以排除浅衣旁人，另一实际施力者为深色上衣。额外错绑与完整对应待定。",
+          "files": {
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision_PLAN.npz": "88086ba22acccd8314a0044e6eebdadab5480352024e43db4edd7e9a5f1c5a66",
+            "research_results/clip_67b65680d3f086877e394195/dual90/DECISION_PROMPT.json": "423b7d2dbca9217e1c55eb451c87b4bd76b9975c2b2bee476d8eccb6e6cda42d",
+            "research_results/clip_67b65680d3f086877e394195/dual90/DECISION_SCHEMA.json": "557d98896d2c951961d655fe8fa348cea47648486ad4315b2fe3120c83a6bfb6",
+            "research_results/clip_67b65680d3f086877e394195/dual90/PREDICTION.json": "ba4040cca309adf223a4a63f58e9cf8c3fa72a933d069b9d85d10b50bce0659d",
+            "research_results/clip_67b65680d3f086877e394195/dual90/TERMINAL.json": "df56c03bdf26d4a2b1a062a95815dd2a99901f84fb8d16a59e67c7f6d19d14a1",
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision/GENERATED_TOKENS.jsonl": "3aa4d88fb5694b6a1cb3671d8c2412c9c37bcf65b3530445b725ed6fd9953f80",
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision/GENERATION_START.json": "9683cad97f3cee884b41641cae5b715849276dec5247f3035a4091d6097774b8",
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision/INPUT.json": "c3b7addc149bc89eb4e92df5dcd18b30a9d4d308ddea9b2c634d609b6375ade4",
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision/RAW.txt": "a0e237526a41820df33fa21dece7486db8133c61ce55fecf02aa1c7e20116106",
+            "research_results/clip_67b65680d3f086877e394195/dual90/decision/RESPONSE.json": "239a014b7398b11bed68816cc9ec093951d5c9aaf8e46d86751f3963a5a55521"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": true,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": false,
+          "false_binding": true,
+          "reason": "卡其裤者和相向推抵可核，第二人衣色有混淆；另将绿背包者普通站立标为G06，明确额外错绑。",
+          "files": {
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision_PLAN.npz": "4259f6c7d3c1f592d6b716f8976ec285d4d3d9dab4dd1c1b6f150ac1a8969b3c",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/DECISION_PROMPT.json": "3aa3f33ddbf6f9cc09a05a5ef5810664a34de11cb0f639f86de12271c4de562d",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/DECISION_SCHEMA.json": "557d98896d2c951961d655fe8fa348cea47648486ad4315b2fe3120c83a6bfb6",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/PREDICTION.json": "dbc31d7922719aaa1725a150b0c4d655cf5660020615b213a7b2d4b854c292db",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/TERMINAL.json": "53a0d03d54c22ca5b97cb27dcf17ed9e743fb21e20c0e15fe8df547cfa7b9d3e",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision/GENERATED_TOKENS.jsonl": "eb333ee0cd92a06dea8c864a885332a2b14bd4f7d2b7516230e2494d804468a6",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision/GENERATION_START.json": "ec416b7e5429dfd02f095eb4575e1aae3f4854a4d0c45f6a6f6a5c376d084ae8",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision/INPUT.json": "a25604df876dcc70233aff5996314af8c72f7d8ff0ec8cfb713507c48867b9d7",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision/RAW.txt": "51c85999e31486012b5b50d43076ec155232cc45c3f79f0cc9139f5a84391828",
+            "research_results/clip_67b65680d3f086877e394195/dual_residual90/decision/RESPONSE.json": "10af2bda89b1740989a00f9f5c4695a72e8b3d69ee2cc27feb82e7de78f9fd80"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_8369ddb83a2e50c1ded1b030",
+      "source_observation": "After the shot/time transition, flames burn at ground level near parked cars. Illumination/reflection on a silver car is not evidence that the car itself is burning. The person's causal role and later extinction are not established. Native frame anchors were viewed again; temporal localization is recorded separately, not called IoU.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\118_clip_8369ddb83a2e50c1ded1b030\\overview_01.jpg": "f9246c660582ae41cbf667a3c6b306e3032bda3aff78f45eb5db6789fea135c9",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\118_clip_8369ddb83a2e50c1ded1b030\\native_keyframes.jpg": "0461d6355191b82d69a465f8e9b2a516f47cb6f72b4a67e62101dad82cd4426e",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_8369ddb83a2e50c1ded1b030\\annotation.original.json": "062735f0f234d1eb61cfa27334fc08729f049e21a01141bdf34ad24adca2d411",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_8369ddb83a2e50c1ded1b030.v001.json",
+      "previous_source_receipt_sha256": "df8adff7088eedd3ff1d30935871512af998170089333cca76a05b2a7b1804d2",
+      "verdicts": {
+        "full_native": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": false,
+          "false_binding": true,
+          "reason": "肯定火焰，但异常主体明确写银车被毁，反光不能证明车体在燃烧；另列G04导致类别集合错误。",
+          "files": {
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/DECISION_PROMPT.json": "d675882c76f0395ce51d465180fd47330f4d45dc58a5727d1892897416672051",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/DECISION_SCHEMA.json": "ed19df3027cb2fef92a23f4c2ade35e57095ccbfbb918c804e762d71227ebb6e",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/PREDICTION.json": "802f147f05aef45e0fd8bb7649796ee9f9bccbbea92bd60ffff2c3df894791c8",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/TERMINAL.json": "2b7717c5e4b238cb036bef43a5c2afd8a5475cfb079470e0d4ca3af03b7a1fef",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/decision/GENERATED_TOKENS.jsonl": "15761bdb53dbd80c65d63bcea13a042fd330e67778a0245253018ad69b4c5910",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/decision/GENERATION_START.json": "a4b75b2d94682e2424b7f7e658c1911692b9927c8cc6b5d236e2d1392e5283e2",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/decision/INPUT.json": "3f9f53b7845d345471b25cc2107fe139ee78b78abf4fdf9b971c0fb485f58892",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/decision/RAW.txt": "5a619888a57c4eb2df6ca337ca50bed01663b5bf3df71e008d0fa737fcc70f05",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/full_native/decision/RESPONSE.json": "f4dcdaf1560d516f6dd6114b9232ba1aef712deee101252d32bb457446f9383d"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "看到停车区明火，异常状态却绑定银色轿车，而非可见车旁地面火焰。",
+          "files": {
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision_PLAN.npz": "9b73da09528063359d6e815cb86555cb70c6eb9cdb0219a58aaee195f3c5e531",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/DECISION_PROMPT.json": "b87d25ca2f80c1dc8253528a4b320f7d56b43b3d16bf215f7046442fdc04e4cf",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/DECISION_SCHEMA.json": "ed19df3027cb2fef92a23f4c2ade35e57095ccbfbb918c804e762d71227ebb6e",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/PREDICTION.json": "79eb3090efb97508ab8dedfc2d1ebb760c9c882945283d33055a5752bac03e3a",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/TERMINAL.json": "db02f2bda6cc49569c889edf2a214159d2f4df692a2a55db7c83c254a7239dc6",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision/GENERATED_TOKENS.jsonl": "23f59decda3d4c8f99c0e7bbf573b5fec250a99a960417948d0ca1d10b0ce894",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision/GENERATION_START.json": "ce904f3202b8fadb67cc40a34c3c3c71f8e86cee5ea3c9570fe463ecf08083b0",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision/INPUT.json": "06062d3dbed2de8fa102abe1e9fc286d1fc2f460d512983a04999c1ddcf0cce4",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision/RAW.txt": "b337829faa10af6661d6e7995efaab10e33fca34369ec7c218a7cdd8f4e93528",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/global90/decision/RESPONSE.json": "bfb030f314fa9531f8e7d8e94e36acfe684da55ba691ac59769ca7cc52c53db8"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "认出火焰，但把被照亮的白色轿车明确作燃烧爆炸主体。",
+          "files": {
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision_PLAN.npz": "c7a95a84aafe0745a1e93aa57a1f41b3001797d2fd6453b729a6746ca2d68111",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/DECISION_PROMPT.json": "bac8eef231ac8565b895466645ede2b1972799db0c706aa26c935866b6c87f0d",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/DECISION_SCHEMA.json": "ed19df3027cb2fef92a23f4c2ade35e57095ccbfbb918c804e762d71227ebb6e",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/PREDICTION.json": "8f1246734bdfe3d1b77f83d4c5591fcfbfc5556dc01d6badf5d8012993693335",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/TERMINAL.json": "5051b78b4abfd5bf6925f4e621a11cde0326c9ba4fb6987cfe00ea63dbbe5e34",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision/GENERATED_TOKENS.jsonl": "48605d6d98a1e396167a14fabd93f6f85a3b6387f29ff7e24b6ee3851e68ab30",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision/GENERATION_START.json": "9fd81db83e19a01f6ea216fbfcbb411e77e1d78e01f5c08758e15e4749d2bef1",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision/INPUT.json": "399ca698cc97aaaecb5c2d98c1bd3ac510c7135f026d6168ef5ce905c8a550ae",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision/RAW.txt": "aefb1a44a46bfb617b1a11ced3868deab20593f87f392c865ee6bfbf467fe9ce",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual90/decision/RESPONSE.json": "331bd76e70aaa475e5dde8f181996d107dbdf72a17620b242283afcb0f0b14f5"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "肯定火焰，却把车头/银车作为火焰主体并断言熄灭；画面只支持车旁地面起火。",
+          "files": {
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision_PLAN.npz": "321f10546efcf896bfd04d8fbdfbc9489f69d80beb6b13c61f87fe70fb700269",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/DECISION_PROMPT.json": "a1965d168c0c8f4d11ff79c3541d7d6cdb37f3065a545ec1462bd58ea94094b2",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/DECISION_SCHEMA.json": "ed19df3027cb2fef92a23f4c2ade35e57095ccbfbb918c804e762d71227ebb6e",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/PREDICTION.json": "c95639179ae3d8f54e1ff92419d9aeb5874a17757fac64ae4b98e3e7ec38da29",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/TERMINAL.json": "d794574d3c9193fb79fbcff88a2a18b31201581a9c8774f2e6cb38da445efcf6",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision/GENERATED_TOKENS.jsonl": "2660725437b671caec5825a4549a548bb2b34af7d45184c1555d155bf5d3c1bb",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision/GENERATION_START.json": "ec0e4a22a6cf8e9ee798689a850da8546fd4b8671a7cb275a370742f0f1cb333",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision/INPUT.json": "7124b0b4116a09c7fae0e409cd607e44b1f7a45ce1a6b93dde397b1b31b4bc1a",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision/RAW.txt": "cc243e6e06cef0ebd6f54ba5f3ca04b6adc7915e451e064bae10a02be01e8041",
+            "research_results/clip_8369ddb83a2e50c1ded1b030/dual_residual90/decision/RESPONSE.json": "e382d0ed1c39f9c48954e54fbb2dc7eddabe220483d6a93f9c51a009ede32327"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_922335683d02442db1eba4be",
+      "source_observation": "At the distant group by the parked car, the right light-shirt/dark-trouser person raises arms toward the dark-clothed person, then bends/backs right while others retreat left. The near-right white-shirt/light-trouser walker is separate. No visible dark-clothed person falls backward as asserted by the baseline. Fine contact roles under occlusion remain manual.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\127_clip_922335683d02442db1eba4be\\overview_01.jpg": "39d5231d3055b2c1700c19ca61adca8c021e981f9aff34d2ff9393a8ca5222bd",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\127_clip_922335683d02442db1eba4be\\native_keyframes.jpg": "2de56cdb83c06cc123cd8b95594f7e24c592754190c38731ff0ac8e5547350b4",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_922335683d02442db1eba4be\\annotation.original.json": "ac6719d45d52e1607978032893416aece2da43c8e4a8e1dbd1f0b8a080c5c05c",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_922335683d02442db1eba4be.v001.json",
+      "previous_source_receipt_sha256": "a5413ec8c38299772ff9b1bbf616369dc38396d2c907c5caf27eff629dd1b03e",
+      "verdicts": {
+        "full_native": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "把两名深衣者推倒白衣行人写成异常，近处行人独立；无可见被推倒事实。远处细接触仍遮挡。",
+          "files": {
+            "research_results/clip_922335683d02442db1eba4be/full_native/DECISION_PROMPT.json": "d08460325dde11f2e9a735f9e8a9a455a0ef396da8f496d19fd5f5d8f3ab76c8",
+            "research_results/clip_922335683d02442db1eba4be/full_native/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_922335683d02442db1eba4be/full_native/PREDICTION.json": "90f801ae3b70d8a4d8d08e30c02bfd2ba4be2f39da9575fe8330c471cf45da02",
+            "research_results/clip_922335683d02442db1eba4be/full_native/TERMINAL.json": "0cd91c82eebd970230101e6e91c8798441a998058e52e66ebf4a80c8ab6f7f46",
+            "research_results/clip_922335683d02442db1eba4be/full_native/decision/GENERATED_TOKENS.jsonl": "b0da2669f8706e1ba3c361ce3935256127bccac7ab451e9f9be480b7a0b4cc4a",
+            "research_results/clip_922335683d02442db1eba4be/full_native/decision/GENERATION_START.json": "bf401799390888d87e11a5f4311f1e283e9a782f56d02a18f94d622d50f6ce5d",
+            "research_results/clip_922335683d02442db1eba4be/full_native/decision/INPUT.json": "1318cfe43b3c7467495fdf6065642f7010bb24ea238c2b3560673fdeb7b0a8bd",
+            "research_results/clip_922335683d02442db1eba4be/full_native/decision/RAW.txt": "eb3a4a3b80d503bddda29b4a0178a48a8f00c07356937a777ff9d874fa23cec9",
+            "research_results/clip_922335683d02442db1eba4be/full_native/decision/RESPONSE.json": "a1d36a2083f66f67835f1da1abca2cde83b9884d69ff82471e15c712cc7d1aed"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "无事件，漏确认的远处挥臂冲突。",
+          "files": {
+            "research_results/clip_922335683d02442db1eba4be/global90/decision_PLAN.npz": "d5ae125185e4c417c1787d62e853bffd6a871da6594831e040e62b598c8a80ca",
+            "research_results/clip_922335683d02442db1eba4be/global90/DECISION_PROMPT.json": "d4fab593b79ed61d184dd41abc371af2f08029d6c250b72b9aafafbb40a79392",
+            "research_results/clip_922335683d02442db1eba4be/global90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_922335683d02442db1eba4be/global90/PREDICTION.json": "9694da0e8a320a361e33ac7cd5c875c33c4f7d2048c95c2c02ad67b31bd468fc",
+            "research_results/clip_922335683d02442db1eba4be/global90/TERMINAL.json": "c5ddba44c2f3bcc81bda398c7dd2dc117c79aea8cee2c71dac10e279830e4502",
+            "research_results/clip_922335683d02442db1eba4be/global90/decision/GENERATED_TOKENS.jsonl": "ed0cf8d697312f29129f85135f2a53a3ab4308e72fd70a7ecd8ebf1aaa0048cd",
+            "research_results/clip_922335683d02442db1eba4be/global90/decision/GENERATION_START.json": "ac44816ea643f5b13f790b8c7222ea242368b9510bb1ae86ed388252e9d90566",
+            "research_results/clip_922335683d02442db1eba4be/global90/decision/INPUT.json": "ba35b78f428129be1f73b117171199b4308cd282547a317b437d1ba288aeb4d8",
+            "research_results/clip_922335683d02442db1eba4be/global90/decision/RAW.txt": "27502827dcb4d248d037450af6a4e98fc4a4cc26076e6956dd603b5e0d674f6c",
+            "research_results/clip_922335683d02442db1eba4be/global90/decision/RESPONSE.json": "dce9fd2ba9b723808dc508f810378c811e890da92853ff553834caea56bb2d58"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "无事件，漏确认的远处挥臂冲突。",
+          "files": {
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision_PLAN.npz": "f85b7355662d6ae1ece7fbfa3cd00b9a943bdbdf2a9e70c5272bac43343e22e3",
+            "research_results/clip_922335683d02442db1eba4be/dual90/DECISION_PROMPT.json": "eb6ed9b2a9b77eea5153e6fd60068348a24e41f14e575bba15c0aa28dc704f9f",
+            "research_results/clip_922335683d02442db1eba4be/dual90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_922335683d02442db1eba4be/dual90/PREDICTION.json": "b9adcef52eb2b8afc78c254efde85d683241376a20c30d2045421f60d444eae4",
+            "research_results/clip_922335683d02442db1eba4be/dual90/TERMINAL.json": "1d9ecb1661d8baf1ea26b2765bb1b1d37803c40dfd6d173b0b3b441937881f94",
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision/GENERATED_TOKENS.jsonl": "bcf15ed72726c9cc1e5ddae3b112c1112cd98d427c49022a9b083b43167df1bd",
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision/GENERATION_START.json": "fbfebde919c6d3d0defcf6320d57f538d44176ebbf565f47c42109f33a57eb33",
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision/INPUT.json": "7eca9b20e22fbb349f9ec4701e2dfa7250c8d607d9ef496e9795e5bd5946c2d7",
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision/RAW.txt": "2032a9353428a737415c69cba38a1cc64c153cbcebf6079c5e3323cbf1bf455d",
+            "research_results/clip_922335683d02442db1eba4be/dual90/decision/RESPONSE.json": "7a1a869e35355ea18bc652b3de6fe65d029ee5a35e9fa5904325a267e1907e1f"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": false,
+          "false_binding": false,
+          "reason": "无事件，漏确认的远处挥臂冲突。",
+          "files": {
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision_PLAN.npz": "2142495bf0597299cccd285599753e632880f6efd2c7d896200490423c7675c9",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/DECISION_PROMPT.json": "e1a3d4b7e86c0f7cbafad6a428f9da6ad52a798514b54d35717a9ab0c1720be2",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/DECISION_SCHEMA.json": "de73aada77359d1ce36f170956f06da185babadf5c98bd992b3bda1a675e7fb9",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/PREDICTION.json": "03aa163786558a9e5da5ca45c125624a9880cb992301d0f13ca58ff1c5149820",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/TERMINAL.json": "82b478552f413f11e78526747629be4b8718a16a252a186a057f78325fdaa144",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision/GENERATED_TOKENS.jsonl": "ee0fce6c77f7b9dd959e72338e63d80d18b90a61a2504d4b997982d53dcc1c9b",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision/GENERATION_START.json": "55b10319c9d809b83b29990ec52b9fa368ff6fb413f25229fa05d30045e5edd6",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision/INPUT.json": "52694f34412d1108a9f509ac4e4b0ddfbcb262a3880dc13c9c492a714f454f2d",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision/RAW.txt": "b3937ccf7511aceaf00cea8540b3a2fc1b359a85e028f25ffba0fa9f8520ceb8",
+            "research_results/clip_922335683d02442db1eba4be/dual_residual90/decision/RESPONSE.json": "1e0fd992645e9fced23c7567bead2931342e5df95ea23ff15887042210bf9afe"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_95e81624ed6a4eb7a320c176",
+      "source_observation": "White and pink riders travel away against their lane's approaching arrow after entering; the initial dark rider's early away movement is preserved separately from the later turn. No visible hands-off/phone behavior supports the new danger claims. Original direction/manual boundaries are not changed.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\133_clip_95e81624ed6a4eb7a320c176\\overview_01.jpg": "f4268d71c08d5e6f8572876b5e163f4f5cc127e3519855956f0f68f392ab66d3",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\133_clip_95e81624ed6a4eb7a320c176\\overview_02.jpg": "97c1632ab2c46f918ffa9eff79ee5337d02f6d690981ad7c78b5347ef23a6862",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\133_clip_95e81624ed6a4eb7a320c176\\overview_03.jpg": "9b2e7c0b8d0d2422050c3fcf66d40fb81fe4902a73519a03c130f58a213f5e95",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\133_clip_95e81624ed6a4eb7a320c176\\native_keyframes.jpg": "4e0c3ddb35fbe00787df73b47765d55b42d8cb76a9372b3a8cd46462ca2e8b3e",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_95e81624ed6a4eb7a320c176\\annotation.original.json": "ae704034aa07aa2a1e5e097445da86fb5cdac8a34697b0e2f00ce32b7bf7dcdb",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_95e81624ed6a4eb7a320c176.v001.json",
+      "previous_source_receipt_sha256": "6fc70bc5661248a75b1fbd3c27e1c5343ac0d45552f7eaafdd0bc64d80efae9f",
+      "verdicts": {
+        "full_native": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "列出三名骑手，但正文止于有方向箭头，未肯定逆行；只列对象和G05不能补足。没有另外虚构独立违规动作。",
+          "files": {
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/DECISION_PROMPT.json": "a05faee8a765b7aff7881b010c24cb7da57d2195dcf38b253d6b91c942f75afb",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/PREDICTION.json": "bc73c69e7305bc2c92c70e96b25f81d64d9db70b327559a6f1a89c8c3789fae9",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/TERMINAL.json": "b46f64991d83ef34bf099418a6c36e495ecffdedf5f93d8289d60186152c0522",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/decision/GENERATED_TOKENS.jsonl": "fabf6de7f37f7bc36fb0ab6648a024f83ccef59c6f9a338545d2864e5de43725",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/decision/GENERATION_START.json": "de7686770d9552b0e48eed90c45a7ee2cf3276352451c8ae8c6e94e1cdc6036a",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/decision/INPUT.json": "fb73dc85ea3441fb13db2fdffc7191a631ad798368dc653c6011b50270d94229",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/decision/RAW.txt": "556af906ae00095ac85ae98eadfd9f607b3240789b4d10c155926244c1390b01",
+            "research_results/clip_95e81624ed6a4eb7a320c176/full_native/decision/RESPONSE.json": "4b26bfbf18b5e5fea753a01d04e7a32dd5295be1918389174316cc1bcf67d1d2"
+          }
+        },
+        "global90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "只说需要判断是否逆行，且将粉衣骑手方向写向镜头；未肯定真实逆行。",
+          "files": {
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision_PLAN.npz": "42c5c4512f1417e4a8fdd153bb53d96f8b74891595884b346255565f38ba734a",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/DECISION_PROMPT.json": "7787634f2773eef017e8c4b0f731c40cc71f535d2c73c12fa1506a03afc06aa0",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/PREDICTION.json": "3ba180c8a48742537f297f9d25cf8c617226bfadfb9d770bac351cc4e89f7951",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/TERMINAL.json": "0a79ab1e0ea2f0c0c9179a1149ed9a8af17703a1599a04638c5f26ea09b358b3",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision/GENERATED_TOKENS.jsonl": "cc5187d15e7d28c75621ece99012e56b10d94915bc1d1f718679763746ec2ff7",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision/GENERATION_START.json": "6dae9bc7341909f5bd6d1a0573803bede3762572891d5629e4cec768efc7d2e5",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision/INPUT.json": "c53c1a43358410e17d3ed5e80ec4a25c7c7ef399900ed93f075c7aaa35d24536",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision/RAW.txt": "52eae5dd5a0c6dac292166d5036372ae895d31480b15dfddd9dc440c6f51ae5f",
+            "research_results/clip_95e81624ed6a4eb7a320c176/global90/decision/RESPONSE.json": "e31d171a7a113168ce0aa3ee277e89beac41bd02f2d2c1ec3321470d39cb9e7b"
+          }
+        },
+        "dual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": true,
+          "reason": "以横道白线为步行区禁骑证据，错误地将两人的骑行动作套用该政策，未肯定真实逆行。",
+          "files": {
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision_PLAN.npz": "20547cdf6e7a0802e21795007110dcb5a8c66afe5f5f9b51bc746a4d18fb6865",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/DECISION_PROMPT.json": "16daed5356c35d9244ee6f44265365a4229696da0dfeb561ed6677bc3b2f0fe3",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/PREDICTION.json": "628b124585dc5f0f6f0a7c446105555425d8fd382806097037624736776a1d9d",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/TERMINAL.json": "71033905b44d94e1053227cdaa04cf0b7b8cbf567409fe7597b0ad6fe76cc060",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision/GENERATED_TOKENS.jsonl": "21ec8ca1139569bb056c970949b03e5eb80919995c47011a362f7ae326d7bb2a",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision/GENERATION_START.json": "ad7a8b7a09d0394a3bb5e984c0c278568b0ea84e2f44deca2ed178b277bb41df",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision/INPUT.json": "8478a7fa6519b5ae8d5dcc773b779caaf4e63541d7a408a4aec5de5d165d4b41",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision/RAW.txt": "ae0511d3ccfd4c8b2302b602fd0a6f15d592f27fd509a2674981af1fa2625735",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual90/decision/RESPONSE.json": "4ff54fdb0489505b947c58dd564f48fdd00b2d530d62d7c54d4dc2dd39643563"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": false,
+          "all_binding": false,
+          "event_correct": false,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "明确两人未逆行且均abnormal=false，漏实际逆行，没有正向错绑。",
+          "files": {
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision_PLAN.npz": "1fd2854d6620856b9ad08a41b2a7418f71a70a1303d8bc284d5930e013e85da8",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/DECISION_PROMPT.json": "ae7234db4055853048a9d74744acc0334c758d2633000feaecb6f5d7e9df2e3c",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/DECISION_SCHEMA.json": "afac0b263fc0adafd4a79780fec730e970756f7d6533fece61bf1814ee01ee25",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/PREDICTION.json": "e5c99857df44f59fab41577e68d5d7a2de4ab39a0a64ef448f83867a7254d6dc",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/TERMINAL.json": "b92650f93bc7a633817762d11e86b9d51a6fe0fa377386f15fbcf12cfb97f234",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision/GENERATED_TOKENS.jsonl": "975552666bfb29e83b9b8407f60569aec5de6ce1ca9db379b97b346d72d2ce33",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision/GENERATION_START.json": "9336c1de996cbbfdf776d46052953767bf215c5f03cd540169decb1bce088264",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision/INPUT.json": "38c32f7ad76d681a37a50d3d6203b83da6ddd0ca01413770f39e6c1f93e9d028",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision/RAW.txt": "56a7853d5915bea8d44b84da78e75d480fe6994bdda1044f261c5ea4fc3c94b8",
+            "research_results/clip_95e81624ed6a4eb7a320c176/dual_residual90/decision/RESPONSE.json": "d17e737c680b05529508280ad3b098fba1abc25fae8ed507265addcdc1d490a4"
+          }
+        }
+      }
+    },
+    {
+      "clip_id": "clip_a51f9f01f0c00be924c79d69",
+      "source_observation": "The unique blue-black striped-shirt/dark-trouser rider uses a phone at the ear while the other hand controls a pale-blue basket bicycle. The hand later returns; the independent walker is not abnormal.",
+      "source_files": {
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\150_clip_a51f9f01f0c00be924c79d69\\overview_01.jpg": "ac8a5bdbee8e984d89dfe1686c2d01aa059185e7707152f174b4cea1d8caf9be",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\150_clip_a51f9f01f0c00be924c79d69\\overview_02.jpg": "d7feeb9eaeaba5fa0cf00a9e741aa0bcb0ec61098a650d7a793bcdf10e6adbdd",
+        "VAD/experiments\\coarse_fps10_232_8b27b_20261023\\four_level_visual_audit189_20261024\\visuals\\150_clip_a51f9f01f0c00be924c79d69\\native_keyframes.jpg": "8cd213bf2a4cf259e0cc44c341aa2f2d3f85a74a695b52a6f168f85e5e990d85",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\original_i3_reference\\clip_a51f9f01f0c00be924c79d69\\annotation.original.json": "27174da20cea90815295f7ac2a205426ac95cbc96afad02f8fd669a3bf548c4c",
+        "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\BINDING_PROTOCOL_V3.md": "3adb175bc5681826f2f0cab87a6295261428e9bf4d99e75c1a4491fe5cca0277"
+      },
+      "previous_source_view_receipt": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_a51f9f01f0c00be924c79d69.v001.json",
+      "previous_source_receipt_sha256": "fd765aec85af9f68b0611618faa734ef158f95aa1fe42b08bf8897e3f1408e63",
+      "verdicts": {
+        "full_native": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "唯一条纹衣深裤者在移动的浅蓝前篮自行车上举手机至耳边；重复同一事件不多计。",
+          "files": {
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/DECISION_PROMPT.json": "9f9768b572d3c74aaa398dbe67fa737ca303b8012bd67e91f31d69b980a9d938",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/DECISION_SCHEMA.json": "d6693cdceb63775fff07d0f78379c2cc6d47949e2475f8e2e67eab2e0a992ec0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/PREDICTION.json": "0247392ea083d60317210fa06ce2b9c00fc293b18534e6e91bdc3b3cdb72ded2",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/TERMINAL.json": "554cf258d78113c8f43d902f37cbbf0a9708a4f8558a7a5a261af7f3ed2ea910",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/decision/GENERATED_TOKENS.jsonl": "4411aa48c1042ab2b6684d9314e6c9d18f326dc657c6843b9085fc08fbd3a214",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/decision/GENERATION_START.json": "3bc1e135e0016293ff6c5e34631efc32cac4a48ffc3fe2d110afbec56f033ed0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/decision/INPUT.json": "f9175af0a55c6449fa525483ca23532bcd35819a7a5dae1a9fa3ec232f318a94",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/decision/RAW.txt": "afec0d27e956108225d4ece49f1718e0d7429f7e9c3185a8f3d8e5317dff734a",
+            "research_results/clip_a51f9f01f0c00be924c79d69/full_native/decision/RESPONSE.json": "0d762c704144acdd9adf241afeb1e45147bcc5e440e83b482431c50e6c12ee53"
+          }
+        },
+        "global90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "条纹衣深裤、浅蓝车和手机动作唯一对应；全程持续、观看而非举耳及手别另留。",
+          "files": {
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision_PLAN.npz": "643a1f3188ba98393fe3fc45589ef2d6adae3a51f40e1c5af092281bd33a310f",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/DECISION_PROMPT.json": "ac2d1e3b6a0a1a85d36c516c058def90faacf4304e5b140e8e37b6fce754c72a",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/DECISION_SCHEMA.json": "d6693cdceb63775fff07d0f78379c2cc6d47949e2475f8e2e67eab2e0a992ec0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/PREDICTION.json": "08a865ed91edea626805fbca24fb23f394d4865291e9212392f4565c92ce9405",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/TERMINAL.json": "fd1d0a06b1503e25b8eada59d1f4214163681442d39088df40fdea34cda70fae",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision/GENERATED_TOKENS.jsonl": "84e56a11eaabf90b89afceae9abd5ce23231fd127cab1b42d220cea532a26ea8",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision/GENERATION_START.json": "f9f8f9dd7425089274a895e62abc71a9bc4275c4350cddf62eb2274b74941714",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision/INPUT.json": "94477698936af1d052d13bbab8e62ae308d4cedccd09a76e9bfadce32c136e74",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision/RAW.txt": "d3881bb5fefcd3f84fa740eb0297564245243157afb01c105229362247d5ff52",
+            "research_results/clip_a51f9f01f0c00be924c79d69/global90/decision/RESPONSE.json": "a00f1dd373968141dee9bf115812184fa0811183eb87b7bb8bb1bf74019bb5af"
+          }
+        },
+        "dual90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "识别移动中使用手机的唯一条纹骑手；重复同条、帽子和手部细节另留。",
+          "files": {
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision_PLAN.npz": "2d3a099dffe24c8ca2ded6edf369acd9b45e2ab3e79a0cf60d5408f7a0045f2a",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/DECISION_PROMPT.json": "d627708b9313e787f7c007b1044bae7386e98e5f86639a8eff085acc56a60e65",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/DECISION_SCHEMA.json": "d6693cdceb63775fff07d0f78379c2cc6d47949e2475f8e2e67eab2e0a992ec0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/PREDICTION.json": "04373fc2c27a28803f9b8e902d52730c331812695464c2e0878289ca3ebbad54",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/TERMINAL.json": "b32db4ed3cb052fc3fde41da9d7a17da0f9204dc0282da37f1ab9a4a4dd6f02e",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision/GENERATED_TOKENS.jsonl": "80d088f0352d2f7afdf006787b4b6b3e82b0b8b73c1387faae41aa8e055c97f0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision/GENERATION_START.json": "2f97af3858675623963f66b02639a26d7eea8c9d9a609730e1420495b6416d66",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision/INPUT.json": "8bad6d5ae47abab04686ca9f8ece7bb591482989f070265654dd198a30990fb9",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision/RAW.txt": "3203fb59ecc9321d3b269430c8aa89ff43e721476b56dfc0b330ef01116d7a66",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual90/decision/RESPONSE.json": "6496897bc169ec7899cdf21264ae694036122d3ee1465c2c31111b119a4b459d"
+          }
+        },
+        "dual_residual90": {
+          "any_binding": true,
+          "all_binding": true,
+          "event_correct": true,
+          "category_correct": true,
+          "false_binding": false,
+          "reason": "与dual90在本片的事件和对象相同，唯一条纹骑手；重复项不多计。",
+          "files": {
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision_PLAN.npz": "f9bc73bf9d45d0106fbe3e4aa3499678c1ff3658b01ee70d89335523d66deffb",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/DECISION_PROMPT.json": "7f7536c18c6256997bcfae78b81c8ed986122b740885681f0ddea080b702a4cd",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/DECISION_SCHEMA.json": "d6693cdceb63775fff07d0f78379c2cc6d47949e2475f8e2e67eab2e0a992ec0",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/PREDICTION.json": "fd8671e4768e2a547d27a358b0cd1111ddcfef9de78212f33697ed08f3816b5d",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/TERMINAL.json": "93714fe865b309346385bb5355fd67f4dc097339ed4294335ceaad719db3af69",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision/GENERATED_TOKENS.jsonl": "ecac29fd295921889e8e0c59d3c4f10c4b37e87810bc47eccfe569283b2b60b6",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision/GENERATION_START.json": "3fd58db7df386d9fc743e8e208e26c2c0c55483934a6c1eac1c7ba1569bdd2c7",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision/INPUT.json": "65187d1af6ec737589a79d7c21fbdbf96bd2d9a81be41093639650ca77d23180",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision/RAW.txt": "14bb79bf587b8d48b476d12ce08a1eae4b6a898aeaca9d2afa8dfb264c43eb0a",
+            "research_results/clip_a51f9f01f0c00be924c79d69/dual_residual90/decision/RESPONSE.json": "a7d55e24aaf905dc39c616d1ecb7f6e0114cdc654910f38189b709f06431a4a9"
+          }
+        }
+      }
+    }
+  ],
+  "human_verified": false,
+  "training_eligible": false,
+  "expansion": false
+}

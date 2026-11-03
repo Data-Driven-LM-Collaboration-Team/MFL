@@ -1,0 +1,437 @@
+{
+  "at_utc": "2026-11-02T13:15:24.561648+00:00",
+  "eligible_paired_clips": 16,
+  "eligible_cells": 64,
+  "excluded_clips": 4,
+  "excluded_cells": 16,
+  "entries": [
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0bcffd8678ef479a12e9f485.v001.json",
+      "sha256": "c04b1421fc98952c0a06e84fb9c97b92fc58f660ede3d3327062bebce51dde34",
+      "clip_id": "clip_0bcffd8678ef479a12e9f485",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0e3851224f7f78427ce20532.v001.json",
+      "sha256": "ab211a174257c6ca4d836c6040bb2db5413294d4677b9a3113edffa0cc49f68c",
+      "clip_id": "clip_0e3851224f7f78427ce20532",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_1aef1799d16104c8509f7383.v001.json",
+      "sha256": "f4b6f63985d34bd54549ac75fd3495185afe158f083143f40e962308d59cd272",
+      "clip_id": "clip_1aef1799d16104c8509f7383",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_2d64ce7d1a7792c55f362679.v001.json",
+      "sha256": "6b30e65f211f63d94e0f35b184b5e008ef733f72082badab17f5050c3686a484",
+      "clip_id": "clip_2d64ce7d1a7792c55f362679",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_43f409d01d48ae2cecd52247.v001.json",
+      "sha256": "6acfcb647e2d18d848bda0a12d8587b66c82e8f970ee2c236df25b574ce7ec3f",
+      "clip_id": "clip_43f409d01d48ae2cecd52247",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_5795bf152bce19c12b76179a.v001.json",
+      "sha256": "6f68a1c0e810640aa1441abb24b49161dca68525f3e6bd9955d88eac2ba8ffb9",
+      "clip_id": "clip_5795bf152bce19c12b76179a",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_60592c2ac43b32947b17f7c2.v001.json",
+      "sha256": "e0bf45938098e9943038b7c8748cabbe6c940757902d0b55476a323a0d8e7803",
+      "clip_id": "clip_60592c2ac43b32947b17f7c2",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_67b65680d3f086877e394195.v001.json",
+      "sha256": "7e43d764a6403b3f8b48d3d488f1f92ab242dc3e577568e5f1d093d52e1938ed",
+      "clip_id": "clip_67b65680d3f086877e394195",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_8369ddb83a2e50c1ded1b030.v001.json",
+      "sha256": "b3c408305cf74348b0f92da7bc94205d9d717f88c1283fee3ae01b29d892ebad",
+      "clip_id": "clip_8369ddb83a2e50c1ded1b030",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_922335683d02442db1eba4be.v001.json",
+      "sha256": "b7ab1d0f226cabd50bf6548298807095d471d1cdc39e788a0af1594727ddade4",
+      "clip_id": "clip_922335683d02442db1eba4be",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_95e81624ed6a4eb7a320c176.v001.json",
+      "sha256": "51ae5d25cf3c942e2df57219820721655e930963fe525454ee319e29468f71df",
+      "clip_id": "clip_95e81624ed6a4eb7a320c176",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_a51f9f01f0c00be924c79d69.v001.json",
+      "sha256": "1fcf178e8fd342291ba32c855ff7618910ecd67d4f3642495dfb6d2505e867d8",
+      "clip_id": "clip_a51f9f01f0c00be924c79d69",
+      "stratum": "historical_eligible12"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_d916fab933f15ca1513c7ffc.v001.json",
+      "sha256": "e08c345fb113ceb20a927f93d88e1e377cfa428e6bf0e0c14c3d66a09f3bbb5e",
+      "clip_id": "clip_d916fab933f15ca1513c7ffc",
+      "stratum": "additional4_not_in189"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_e461afceacaeb3105a8b876b.v001.json",
+      "sha256": "68c796a3f98df51b819dccbf2e46c75a5bcc9eb3ad38e6eb4d526c9791953806",
+      "clip_id": "clip_e461afceacaeb3105a8b876b",
+      "stratum": "additional4_not_in189"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_f8316276e4bd13ac0bca06dd.v001.json",
+      "sha256": "317328c85f0bee3089bbdfdbf4c08096d4734f7207afc2b447633cb49281b316",
+      "clip_id": "clip_f8316276e4bd13ac0bca06dd",
+      "stratum": "additional4_not_in189"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_fef94ec2eb125d8a7ddcbe03.v001.json",
+      "sha256": "5afb021082128705bc4adda738751f3b88d9369de999c97a24c9a1527d9baf50",
+      "clip_id": "clip_fef94ec2eb125d8a7ddcbe03",
+      "stratum": "additional4_not_in189"
+    }
+  ],
+  "exclusions": [
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_0847ec7890673a6a030c4bbe.v001.json",
+      "sha256": "ef0ef933c0b370cd6dae04d8911829d9d02a83b66500705fee17b9539bb543b6",
+      "clip_id": "clip_0847ec7890673a6a030c4bbe"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_301ddf305168ba03ae1ec020.v001.json",
+      "sha256": "f9c1fb0ab2549545086110035bea6a4ac98e474188fc4941769721452d03dc8f",
+      "clip_id": "clip_301ddf305168ba03ae1ec020"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_679e476264053240d2c8e6da.v001.json",
+      "sha256": "9a59f4afdd657002c929b2bec8d885dd1ff91be014ea1ef6e474098d24123686",
+      "clip_id": "clip_679e476264053240d2c8e6da"
+    },
+    {
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_a2347f6a9f4fd9d6548a4740.v001.json",
+      "sha256": "9258b4c0a09514e30fc8bc07592985f9271fad55aab6f197aebe77f0efd4a73a",
+      "clip_id": "clip_a2347f6a9f4fd9d6548a4740"
+    }
+  ],
+  "metrics": {
+    "historical_eligible12": {
+      "full_native": {
+        "any_binding": {
+          "passed": 8,
+          "failed": 4,
+          "pending": 0,
+          "denominator": 12
+        },
+        "all_binding": {
+          "passed": 5,
+          "failed": 7,
+          "pending": 0,
+          "denominator": 12
+        },
+        "event_correct": {
+          "passed": 9,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 12
+        },
+        "category_correct": {
+          "passed": 11,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 12
+        },
+        "false_binding": {
+          "passed": 5,
+          "failed": 7,
+          "pending": 0,
+          "denominator": 12
+        }
+      },
+      "pm90": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 9,
+          "pending": 0,
+          "denominator": 12
+        },
+        "all_binding": {
+          "passed": 3,
+          "failed": 9,
+          "pending": 0,
+          "denominator": 12
+        },
+        "event_correct": {
+          "passed": 4,
+          "failed": 8,
+          "pending": 0,
+          "denominator": 12
+        },
+        "category_correct": {
+          "passed": 7,
+          "failed": 5,
+          "pending": 0,
+          "denominator": 12
+        },
+        "false_binding": {
+          "passed": 5,
+          "failed": 7,
+          "pending": 0,
+          "denominator": 12
+        }
+      },
+      "pm92": {
+        "any_binding": {
+          "passed": 2,
+          "failed": 10,
+          "pending": 0,
+          "denominator": 12
+        },
+        "all_binding": {
+          "passed": 2,
+          "failed": 10,
+          "pending": 0,
+          "denominator": 12
+        },
+        "event_correct": {
+          "passed": 4,
+          "failed": 8,
+          "pending": 0,
+          "denominator": 12
+        },
+        "category_correct": {
+          "passed": 8,
+          "failed": 4,
+          "pending": 0,
+          "denominator": 12
+        },
+        "false_binding": {
+          "passed": 7,
+          "failed": 5,
+          "pending": 0,
+          "denominator": 12
+        }
+      },
+      "merge92": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 9,
+          "pending": 0,
+          "denominator": 12
+        },
+        "all_binding": {
+          "passed": 3,
+          "failed": 9,
+          "pending": 0,
+          "denominator": 12
+        },
+        "event_correct": {
+          "passed": 4,
+          "failed": 8,
+          "pending": 0,
+          "denominator": 12
+        },
+        "category_correct": {
+          "passed": 7,
+          "failed": 5,
+          "pending": 0,
+          "denominator": 12
+        },
+        "false_binding": {
+          "passed": 6,
+          "failed": 6,
+          "pending": 0,
+          "denominator": 12
+        }
+      }
+    },
+    "additional4_not_in189": {
+      "full_native": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "all_binding": {
+          "passed": 2,
+          "failed": 2,
+          "pending": 0,
+          "denominator": 4
+        },
+        "event_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "category_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "false_binding": {
+          "passed": 2,
+          "failed": 2,
+          "pending": 0,
+          "denominator": 4
+        }
+      },
+      "pm90": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "all_binding": {
+          "passed": 1,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 4
+        },
+        "event_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "category_correct": {
+          "passed": 4,
+          "failed": 0,
+          "pending": 0,
+          "denominator": 4
+        },
+        "false_binding": {
+          "passed": 1,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 4
+        }
+      },
+      "pm92": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "all_binding": {
+          "passed": 1,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 4
+        },
+        "event_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "category_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "false_binding": {
+          "passed": 1,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 4
+        }
+      },
+      "merge92": {
+        "any_binding": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "all_binding": {
+          "passed": 1,
+          "failed": 3,
+          "pending": 0,
+          "denominator": 4
+        },
+        "event_correct": {
+          "passed": 3,
+          "failed": 1,
+          "pending": 0,
+          "denominator": 4
+        },
+        "category_correct": {
+          "passed": 2,
+          "failed": 2,
+          "pending": 0,
+          "denominator": 4
+        },
+        "false_binding": {
+          "passed": 2,
+          "failed": 2,
+          "pending": 0,
+          "denominator": 4
+        }
+      }
+    }
+  },
+  "all_binding_changes": {
+    "pm90": {
+      "gains": [
+        "clip_8369ddb83a2e50c1ded1b030",
+        "clip_a51f9f01f0c00be924c79d69"
+      ],
+      "losses": [
+        "clip_1aef1799d16104c8509f7383",
+        "clip_43f409d01d48ae2cecd52247",
+        "clip_5795bf152bce19c12b76179a",
+        "clip_67b65680d3f086877e394195"
+      ]
+    },
+    "pm92": {
+      "gains": [
+        "clip_a51f9f01f0c00be924c79d69"
+      ],
+      "losses": [
+        "clip_1aef1799d16104c8509f7383",
+        "clip_43f409d01d48ae2cecd52247",
+        "clip_5795bf152bce19c12b76179a",
+        "clip_67b65680d3f086877e394195"
+      ]
+    },
+    "merge92": {
+      "gains": [
+        "clip_8369ddb83a2e50c1ded1b030",
+        "clip_a51f9f01f0c00be924c79d69"
+      ],
+      "losses": [
+        "clip_1aef1799d16104c8509f7383",
+        "clip_43f409d01d48ae2cecd52247",
+        "clip_5795bf152bce19c12b76179a",
+        "clip_67b65680d3f086877e394195"
+      ]
+    }
+  },
+  "normal_control_count": 0,
+  "normal_false_positive_rate": null,
+  "object_precision_recall_f1": null,
+  "independent_tube_geometry": false,
+  "tube_pg_rbdc_tbdc": null,
+  "human_verified": false,
+  "training_eligible": false,
+  "nonblind_diagnostic": true,
+  "adopted_candidate": null,
+  "expanded": false,
+  "decision": "No high-compression candidate improves all_binding versus same-platform uncompressed baseline."
+}

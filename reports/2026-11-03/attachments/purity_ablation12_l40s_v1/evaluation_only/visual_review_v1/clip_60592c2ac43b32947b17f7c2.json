@@ -1,0 +1,72 @@
+{
+  "clip_id": "clip_60592c2ac43b32947b17f7c2",
+  "source_path": "VAD/prompt_lab\\reannotation1554_sol61_xhigh_20261020\\clips\\clip_60592c2ac43b32947b17f7c2.mp4",
+  "source_sha256": "a2194e484f2240662c49a07b868b97f94e79513c70b6c4d6ada81c5b7a83d28a",
+  "actual_input_tensor_sha256": "064ca957479d3b3d6ea86c3ed26fc6019e02009c3b3ab201c84fc8284a1f8a7c",
+  "source_frames_verified": true,
+  "grid_thw": [
+    24,
+    20,
+    36
+  ],
+  "displayed_groups": [
+    0,
+    8,
+    16,
+    23
+  ],
+  "all_groups_in_animation": 24,
+  "temporal_patch_first_frame_only": true,
+  "plans": [
+    {
+      "arm": "pm90",
+      "path": "VAD/experiments\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\evaluation_only\\research_mirror\\qwen3vl8b_i3_high_compression20_l40s_v1_20261102\\research_results\\clip_60592c2ac43b32947b17f7c2\\pm90\\decision_PLAN.npz",
+      "sha256": "27ba81ca2317979a1cf0862e7fdfa059780829b8e319009cf494b2e27d500ded"
+    },
+    {
+      "arm": "select90",
+      "path": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\research_mirror\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\research_results\\clip_60592c2ac43b32947b17f7c2\\select90\\decision_PLAN.npz",
+      "sha256": "cb538ed5c28c6a2cec656c551578fb206fd744004474eb314f72c3132cd6224d"
+    },
+    {
+      "arm": "global90",
+      "path": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\research_mirror\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\research_results\\clip_60592c2ac43b32947b17f7c2\\global90\\decision_PLAN.npz",
+      "sha256": "784ea6abee817e934b25df3306f6a69fff079d790227d91230be97e9ffe98445"
+    },
+    {
+      "arm": "anchor90",
+      "path": "VAD/experiments\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\evaluation_only\\research_mirror\\qwen3vl8b_i3_purity_ablation12_l40s_v1_20261102\\research_results\\clip_60592c2ac43b32947b17f7c2\\anchor90\\decision_PLAN.npz",
+      "sha256": "f55d78b108f9e5798f801ebe149c27a27d9519adcf34946a63d47db9af028e79"
+    }
+  ],
+  "figure_sha256": "01572985000b01142c83af8eb20d911bb10a8ade7e471ddb8f2dd589c136b9d1",
+  "not_attention_or_ground_truth": true,
+  "heat_unit": "source coefficient divided by sum of source coefficients assigned to same output",
+  "normalization_gamma": 0.35,
+  "counts": {
+    "pm90": {
+      "original": 17280,
+      "output_centers": 1512,
+      "support": 15521,
+      "deleted": 1759
+    },
+    "select90": {
+      "original": 17280,
+      "output_centers": 1512,
+      "support": 1512,
+      "deleted": 15768
+    },
+    "global90": {
+      "original": 17280,
+      "output_centers": 1512,
+      "support": 1512,
+      "deleted": 15768
+    },
+    "anchor90": {
+      "original": 17280,
+      "output_centers": 1512,
+      "support": 1512,
+      "deleted": 15768
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "at_utc": "2026-11-02T12:42:27.942703+00:00",
+  "pid": 35506,
+  "cuda_initialized": false,
+  "all_pass": true,
+  "entries": 21,
+  "steps": 84,
+  "artifact_sha256": "93f5ae023530e0d181b3a151ab37451d1f8edc92512074b556641c3aa80db5e8",
+  "freeze": "359c8d73b82fa90465eb5b99d40cf3ae6c79ad35347ae29ccbe0cccedb55a333",
+  "lease": "2d7f0de77ebc4b57bda971bfeeedabad",
+  "scope": "independent local CPU reread; not new inference or new samples",
+  "maximum8192_output_proven": false
+}

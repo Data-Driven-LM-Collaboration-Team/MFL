@@ -1,0 +1,121 @@
+{
+  "at_utc": "2026-11-01T18:57:59.376670+00:00",
+  "expected_clips": 20,
+  "completed_clips": 16,
+  "completed_cells": 32,
+  "pending_clips": 4,
+  "adjudications": [
+    {
+      "clip_id": "clip_60592c2ac43b32947b17f7c2",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_60592c2ac43b32947b17f7c2.v001.json",
+      "sha256": "f8a76f4be1db33c97be907cdef4c5acccc440e66ae8f21c096c22333a943a27c"
+    },
+    {
+      "clip_id": "clip_a51f9f01f0c00be924c79d69",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_a51f9f01f0c00be924c79d69.v001.json",
+      "sha256": "5df6d3a2c6751667431d8184ec96f80a9787dd2f0fd5a3e56e30ed12a77af435"
+    },
+    {
+      "clip_id": "clip_95e81624ed6a4eb7a320c176",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_95e81624ed6a4eb7a320c176.v001.json",
+      "sha256": "f50e6613440784a381aadc4902aaa09544cabdc17adaf2bc9c7c24d5aee1d659"
+    },
+    {
+      "clip_id": "clip_f8316276e4bd13ac0bca06dd",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_f8316276e4bd13ac0bca06dd.v001.json",
+      "sha256": "f1de1925943cd0f80d6ed32f33dac3dcd13eaa5667545fac3c631b9312aa12e2"
+    },
+    {
+      "clip_id": "clip_fef94ec2eb125d8a7ddcbe03",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_fef94ec2eb125d8a7ddcbe03.v001.json",
+      "sha256": "0707a2d886c9f6b32cc11a910299f68ecd00cef27a64c918dab13f58b71ee44b"
+    },
+    {
+      "clip_id": "clip_5795bf152bce19c12b76179a",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_5795bf152bce19c12b76179a.v001.json",
+      "sha256": "7023fb32877c14ef087beef652b02ddac3c3daa761cdf51eb6429743274cb01d"
+    },
+    {
+      "clip_id": "clip_8369ddb83a2e50c1ded1b030",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_8369ddb83a2e50c1ded1b030.v001.json",
+      "sha256": "44fba8e22846bde92fe533255c33a984e564d130a69a6097d24bf9a6d9dfe2e2"
+    },
+    {
+      "clip_id": "clip_2d64ce7d1a7792c55f362679",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_2d64ce7d1a7792c55f362679.v001.json",
+      "sha256": "ee19a533c5b0d5a2522322fcd713b5cd36f1c4113be2981bccb1f87313dd0462"
+    },
+    {
+      "clip_id": "clip_1aef1799d16104c8509f7383",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_1aef1799d16104c8509f7383.v001.json",
+      "sha256": "989ecd80eb646d834302f9998cb670e5bbdbfa06ea18665ce340c1c4c2cda0aa"
+    },
+    {
+      "clip_id": "clip_0e3851224f7f78427ce20532",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0e3851224f7f78427ce20532.v001.json",
+      "sha256": "de992c73d84c026ac111c884745dbc1fe068906d092558399541886244e62596"
+    },
+    {
+      "clip_id": "clip_43f409d01d48ae2cecd52247",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_43f409d01d48ae2cecd52247.v001.json",
+      "sha256": "e0e9b1023bcff9558b92b352e99615be41f0d5ac6660d88e745317a81a0c97b8"
+    },
+    {
+      "clip_id": "clip_0bcffd8678ef479a12e9f485",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_0bcffd8678ef479a12e9f485.v001.json",
+      "sha256": "aa7b6bb3e7f7b4a784f1ba0cdeccbbb3030041323c20d7c89225ead0a92c8555"
+    },
+    {
+      "clip_id": "clip_67b65680d3f086877e394195",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_67b65680d3f086877e394195.v001.json",
+      "sha256": "6744e4a8e7424530e0acf6c473c29a9815b94397dcb36554a01f82f1d03e500f"
+    },
+    {
+      "clip_id": "clip_922335683d02442db1eba4be",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_922335683d02442db1eba4be.v001.json",
+      "sha256": "57d2436d7151816836653c6d383df15454976b8014d4fdd5ae113a66edd1312f"
+    },
+    {
+      "clip_id": "clip_e461afceacaeb3105a8b876b",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_e461afceacaeb3105a8b876b.v001.json",
+      "sha256": "d709987aa94d9535ca89fe0fd5961fbdcfa7adad3455d0d7bd2b2c06f64a99e9"
+    },
+    {
+      "clip_id": "clip_d916fab933f15ca1513c7ffc",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_adjudications\\clip_d916fab933f15ca1513c7ffc.v001.json",
+      "sha256": "e7969bd35237854123693f1415df2b16e7833be9de3c19b21bbab64e7dc9134a"
+    }
+  ],
+  "overall_metrics": null,
+  "human_verified": false,
+  "training_eligible": false,
+  "excluded_reviews": [
+    {
+      "clip_id": "clip_301ddf305168ba03ae1ec020",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_301ddf305168ba03ae1ec020.v001.json",
+      "sha256": "5d99a0480e1576b2e2482a84afc8787d6745ba0a10bc37c57371c384ca92c516"
+    },
+    {
+      "clip_id": "clip_a2347f6a9f4fd9d6548a4740",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_a2347f6a9f4fd9d6548a4740.v001.json",
+      "sha256": "e338004287bfe07e7468f710d27a4afd93baa554cc8f39da91551de9d0ff007c"
+    },
+    {
+      "clip_id": "clip_679e476264053240d2c8e6da",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_679e476264053240d2c8e6da.v001.json",
+      "sha256": "884867b35d3d23cc1f5cbe85b87bda0c85a85bcc4f38d05110f0e27df0b39214"
+    },
+    {
+      "clip_id": "clip_0847ec7890673a6a030c4bbe",
+      "path": "VAD/experiments\\qwen3vl8b_i3_description20_fps10_rental_bf16_v1_20261102\\evaluation_only\\paired_visual_exclusions\\clip_0847ec7890673a6a030c4bbe.v001.json",
+      "sha256": "f3eeb917bf62ad19c1f254f4b4452d1aa6f86a6fb1effd483cc3b618599c9489"
+    }
+  ],
+  "pending_clips_definition": "Historical not_evaluable retained; all four read and documented but primary verdicts intentionally null.",
+  "reviewed_clips": 20,
+  "reviewed_cells": 40,
+  "unreviewed_clips": 0,
+  "excluded_primary_clips": 4,
+  "eligible_historical_anomaly_clips": 12,
+  "eligible_additional_clips": 4
+}
